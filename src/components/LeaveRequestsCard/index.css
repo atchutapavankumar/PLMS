@@ -1,0 +1,117 @@
+.data-res-card{
+    height:180px;
+    width:400px;
+    border-style: solid;
+    padding: 10px;
+    margin:10px;
+    border-width:0px;
+    border-radius:7px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.profile-image{
+    height:60px;
+    width:60px;
+}
+.name{
+    font-size:16;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight:500;
+}
+
+.id{
+    font-size:12;
+    line-height: 20px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight:400;
+    margin-bottom: 0px;;
+    color:#6b6a6a;
+}
+.id-3{
+    font-size:12;
+    line-height: 12px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight:400;
+    margin-bottom: 0px;;
+    color:#6b6a6a;
+    margin-left: 10px;
+}
+.id-2{
+    font-size:12;
+    line-height: 20px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight:400;
+    margin-bottom: 0px;;
+    color:#6b6a6a;
+    margin-left:30px;
+    margin-top:10px;
+}
+.profile-name{
+    display: flex;
+    margin-bottom: 0px;
+    justify-content: space-between;
+    
+}
+
+.name-id{
+    display: flex;
+    flex-direction: column;
+    height:25px;
+    margin-left:5px;
+}
+
+.p-a{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.description-2{
+    font-size:16;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:5px;
+    font-weight: bold;
+    margin-left: 10px;
+
+}
+
+.card-mid{
+    display: flex;
+    justify-content: space-between;
+}
+.accept-btn{
+    background-color: lightgreen;
+    font-family:"Montserrat", Sans-serif ;
+    padding:7px;
+
+    padding-left:20px;
+    padding-right:20px;
+    border-width: 0px;
+    border-radius: 7px;
+
+}
+
+.reject-btn{
+    background-color: lightcoral;
+    font-family:"Montserrat", Sans-serif ;
+    padding:7px;
+
+    padding-left:20px;
+    padding-right:20px;
+    border-width: 0px;
+    border-radius: 7px;
+
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top:30px;
+}

@@ -1,0 +1,224 @@
+.hod-main-container{
+    height: 100vh;
+}
+
+.clg-logo{
+    width:100%;
+    height:100px;
+}
+
+
+
+.nav-bar-title{
+    font-family:"Montserrat", Sans-serif ;
+    font-size:30px;
+    font-weight: 500px;
+}
+
+.nav-bar-title span{
+    color:#111da8;
+    font-weight: bold;
+}
+
+.nav-bar-title-2{
+    font-family:"Montserrat", Sans-serif ;
+    font-size:25px;
+    font-weight: 400px;
+}
+
+.nav-bar-title-2 span{
+    color:#111da8;
+    font-weight: bold;
+}
+.nav-container{
+    margin:20px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ekit_heading_separetor_wraper .elementskit-border-divider {
+    display: block;
+    unicode-bidi: isolate;
+    width: 100%; /* You may adjust this width as needed */
+}
+
+.description{
+    font-size:16;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+}
+.designation{
+    font-size:15;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+}
+
+.card-description{
+    font-size:15;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight: 600;
+}
+
+.count-txt{
+    font-size:35px;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight: 600;
+    color:purple;
+}
+
+.count-txt-2{
+    font-size:35px;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight: 600;
+    color:lightgreen;
+}
+
+.count-txt-3{
+    font-size:35px;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight: 600;
+    color:red;
+}
+
+.count-txt-4{
+    font-size:35px;
+    line-height: 24px;
+    font-family:"Montserrat", Sans-serif ;
+    margin-top:0px;
+    font-weight: 600;
+    color:yellowgreen;
+}
+
+
+.count-containers{
+    display: flex;
+    height:100px;
+    width:70%;
+    align-items: center;
+    justify-content: space-between;
+    margin:20px;
+}
+.count-container-1{
+    height:90px;
+    width:140px;
+    border-left-style:solid;
+    border-color:purple;
+    border-width:5px;
+    padding: 7px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.count-container-2{
+    height:90px;
+    width:140px;
+    border-left-style:solid;
+    border-color:lightgreen;
+    border-width:5px;
+    padding: 7px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.count-container-3{
+    height:90px;
+    width:140px;
+    border-left-style:solid;
+    border-color:red;
+    border-width:5px;
+    padding: 7px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.count-container-4{
+    height:90px;
+    width:170px;
+    border-left-style:solid;
+    border-color:yellowgreen;
+    border-width:5px;
+    padding: 7px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.sub-t{
+    margin:20px;
+}
+.data-container{
+    margin:20px;
+    
+    display: flex;
+    margin-top:0px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.blue-line-container{
+    display: flex;
+    color:#111da8;
+    width:200px;
+    align-items: center;
+    margin-top:-30px;
+    justify-content: center;
+}
+
+.blue-line-container-2{
+    display: flex;
+    color:#111da8;
+    width:200px;
+    align-items: center;
+    margin-top:-20px;
+    justify-content: center;
+}
+.blue-line{
+    border-style:solid;
+    width:50px;
+    border-radius:3px;
+    height:0px;
+
+}
+
+.top-container{
+    display: flex;
+    justify-content: space-between;
+}
+.user-profile-card{
+    width:500px;
+    height:120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 7px;
+    border-radius:7px;
+}
+.profile-username{
+    display: flex;
+    margin-bottom: 0px;
+    
+}
+
+.apply-btn{
+    background-color: #111da8;
+    font-family:"Montserrat", Sans-serif ;
+    padding:7px;
+
+    padding-left:20px;
+    padding-right:20px;
+    border-width: 0px;
+    width:170px;
+    border-radius: 7px;
+    align-self: flex-end;
+    color:white
+
+}

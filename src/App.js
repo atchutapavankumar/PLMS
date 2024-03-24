@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Faculty from "./components/Faculty";
+import LoginForm from "./components/Login";
+import ApplyForm from "./components/ApplyHeader";
+import HOD from "./components/HOD";
+import Principal from "./components/Principal";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/faculty" element={<Faculty />} />
+      <Route path="/" element={<LoginForm />} />
+      <Route path="/apply" element={<ApplyForm />} />
+      <Route path="/hod" element={<HOD />} />
+      <Route path="/principal" element={<Principal/>}/>
+
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
