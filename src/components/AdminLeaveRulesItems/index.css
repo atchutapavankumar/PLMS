@@ -1,0 +1,91 @@
+.table-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%;
+    border-width:0.5px;
+    border-radius:5px;
+    margin-top:1px;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.table-row p{
+    width:100px;
+}
+.approved{
+    padding:5px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    text-align: center;
+    height:25px;
+}
+
+.cancel{
+    padding:5px;
+    background-color: silver;
+    border-radius: 5px;
+    text-align: center;
+    height:25px;
+}
+
+.edit-btn{
+    padding:5px;
+    background-color: purple;
+    border-radius: 5px;
+    text-align: center;
+    color:white;
+    height:25px;
+    font-family:"Montserrat", Sans-serif ;
+    border-width:0px;
+    padding-left:20px;
+    padding-right:20px;
+    align-self: center;
+    cursor: pointer;
+
+}
+
+.popup-container{
+    border-style: solid;
+    border-width: 0.5px;
+    border-color:azure;
+    border-radius:7px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    width:400px;
+    height:400px;
+    margin-left:-60vw;
+    background-color: aliceblue;
+    margin-top:250px;
+    margin-bottom: 250px;
+    padding:30px;
+
+}
+
+.popup-title{
+    font-family:"Montserrat", Sans-serif ;
+    font-size: 20px;
+
+}
+.popup-label{
+    font-family:"Montserrat", Sans-serif ;
+    font-size: 16px;
+    width:200px;
+}
+.popup-input{
+    width:100px;
+    padding:7px;
+    border-width:1.5px;
+    border-radius:7px;
+    outline:none;
+}
+
+.popup-label-input{
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

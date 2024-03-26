@@ -35,13 +35,14 @@ width:200px;
 padding-right:10px;
 `
 
-export const LinkItem = styled(Link)`
-text-decoration:none;
-`
-
 export const NavItem = styled.p`
     font-family:"Montserrat", Sans-serif ;
 
     color:white;
     font-weight:bold;
+    cursor:pointer;
 `
+
+export const LinkItem = styled(Link)`
+text-decoration:none;
+cursor:pointer`

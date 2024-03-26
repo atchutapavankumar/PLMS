@@ -160,7 +160,8 @@ const ApplyForm = (props) => {
             {errors.startDate && (
               <span className="task-error-msg">*End Date is required</span>
             )}
-          </div></div>
+          </div>
+          </div>
 <div className="btn-container-pop">
           <button type="submit" className="create-btn">
             {loading ? (

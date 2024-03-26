@@ -280,8 +280,43 @@
     border-width:1px;
     border-radius:5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #9d2da2;
+    color:white;
+    margin-top:30px;
 }
 
 .table-header p{
     width:100px;
+}
+
+.admin-main-container {
+    min-height: 100vh;
+    margin-bottom: 40px;
+}
+
+/* Other CSS styles remain the same */
+.select-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100vh !important;
+}
+.select-item{
+    padding:15px;
+    padding-right:20px;
+    padding-left:20px;
+    border-radius:7px;
+    border-width: 0.5px;
+    
+}
+
+.search-btn{
+    padding:5px;
+    background-color: #111da8;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+    color:white;
+    border-width:0px;
+    width:150px;
 }

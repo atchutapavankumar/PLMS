@@ -1,8 +1,10 @@
 import './index.css'
 import React, { useState, useEffect } from 'react';
 import ApplyHeader from '../ApplyHeader';
+import Hodheader from '../HODHeader';
 import LeaveRequestsCard from '../LeaveRequestsCard';
-    const sampleData = [
+
+const sampleData = [
         {
             id: 'BEC071001',
             name: 'N.SIVARAM PRASAD',
@@ -162,6 +164,7 @@ const HOD = () => {
 return(
     <div className="hod-main-container">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
+        <Hodheader/>
             <div className="nav-container">
             <div className='top-container'>
                 <div >
@@ -176,41 +179,15 @@ return(
                     </div>
                     <p className='description'> {formatDate(dateTime)} &  {formatTime(dateTime)}</p>   
                 </div>
-                <div className='user-profile-card'>
-                <div className='profile-username'>
-                <img src={sampleData[0].profile} alt={sampleData[0].id} className='profile-image'/>
-                <div className='name-id'>
-                <div className='name'>{sampleData[0].name} <br/><span className='id'>{sampleData[0].id}</span>
-                <br/>
-                <p className='designtion'>CSE (HOD)</p>
-</div>
-            </div>
-            </div>
-            <ApplyHeader/>
-
-                </div>
+                
             </div>
             <div className='count-containers'>
                 <div className='count-container-1'>
-                <p className='card-description'>Total Requests</p>
+                <p className='card-description'>New Requests</p>
                 <p className='count-txt'>53</p>
                 </div>
 
-                <div className='count-container-2'>
-                <p className='card-description'>New Requests</p>
-                <p className='count-txt-2'>40</p>
-                </div>
-
-                <div className='count-container-3'>
-                <p className='card-description'>Rejected</p>
-                <p className='count-txt-3'>3</p>
-                </div>
-
-                <div className='count-container-4'>
-                <p className='card-description'>
-                Pending Requests</p>
-                <p className='count-txt-4'>15</p>
-                </div>
+                
             </div>
 
             </div>

@@ -150,7 +150,7 @@ import ApplyHeader from '../ApplyHeader';
 
 
 
-const Faculty = () => {
+const FacultyMain = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
 
@@ -199,36 +199,43 @@ return(
                     <p className='description'> {formatDate(dateTime)} &  {formatTime(dateTime)}</p>   
                 </div>
             </div>
-         
+            <div className='count-containers'>
+                <div className='count-container-1'>
+                <p className='card-description'>Remaining Earn Leaves</p>
+                <p className='count-txt'>5</p>
+                </div>
+
+                <div className='count-container-2'>
+                <p className='card-description'>Remaining Medical Leaves</p>
+                <p className='count-txt-2'>4</p>
+                </div>
+
+                <div className='count-container-3'>
+                <p className='card-description'>Remaining Casual Leaves</p>
+                <p className='count-txt-3'>3</p>
+                </div>
+
+                <div className='count-container-4'>
+                <p className='card-description'>
+                Remaining Meternity Leaves</p>
+                <p className='count-txt-4'>1</p>
+                </div>
+
+                <div className='count-container-5'>
+                <p className='card-description'>
+                Remaining One Hour Leaves</p>
+                <p className='count-txt-5'>1</p>
+                </div>
+
+                <div className='count-container-6'>
+                <p className='card-description'>
+                Remaining Special Casual Leaves</p>
+                <p className='count-txt-6'>1</p>
+                </div>
             </div>
-            <h2 className="nav-bar-title- sub-t">Leave
-                    <span> History</span></h2>
-
-                    <div className='blue-line-container-2'>
-                        <li className='blue-dot'></li>
-                        <li className='blue-dot'></li>
-                        <li className='blue-dot'></li>
-                        <div className='blue-line'></div>
-                    </div>
-                
-            <div className='data-container'>
-            <div className='table-header'>
-                <p>S.No</p>
-                <p>Leave Start Date</p>
-                <p>Leave End Date</p>
-                <p>Type</p>
-                <p>Status</p>
-                <p>Approved By</p>
-                <p>Total Days</p>
-                <p>Cancel</p>
-
+            </div>
             
-
-            </div>
-                {sampleData.map(eachData => (
-                    <HistoryLeave key={eachData.id} data={eachData}/>
-                ))}
-            </div>
+               
             </div>
 
    
@@ -237,4 +244,4 @@ return(
 
 }
 
-export default Faculty
+export default FacultyMain

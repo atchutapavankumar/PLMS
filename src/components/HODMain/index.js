@@ -1,12 +1,11 @@
 import './index.css'
 import React, { useState, useEffect } from 'react';
-import HistoryLeave from '../HistoryLeave';
-import Header from '../Header';
-import ApplyForm from '../ApplyForm';
 import ApplyHeader from '../ApplyHeader';
-    const sampleData = [
+import Hodheader from '../HODHeader';
+import LeaveRequestsCard from '../LeaveRequestsCard';
+
+const sampleData = [
         {
-            sl:1,
             id: 'BEC071001',
             name: 'N.SIVARAM PRASAD',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -20,7 +19,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:2,
             id: 'BEC071002',
             name: 'John Doe',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -34,7 +32,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: true
         },
         {
-            sl:3,
             id: 'BEC071003',
             name: 'Alice Johnson',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -48,7 +45,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:4,
             id: 'BEC071004',
             name: 'Bob Smith',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -62,7 +58,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:5,
             id: 'BEC071005',
             name: 'Eva Martinez',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -76,7 +71,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:6,
             id: 'BEC071006',
             name: 'Michael Brown',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -90,7 +84,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:7,
             id: 'BEC071007',
             name: 'Sophia Lee',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -104,7 +97,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:8,
             id: 'BEC071008',
             name: 'David Wilson',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -118,7 +110,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:9,
             id: 'BEC071009',
             name: 'Olivia Taylor',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -132,7 +123,6 @@ import ApplyHeader from '../ApplyHeader';
             isRejected: false
         },
         {
-            sl:10,
             id: 'BEC071010',
             name: 'Daniel Garcia',
             profile: 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp', 
@@ -150,10 +140,8 @@ import ApplyHeader from '../ApplyHeader';
 
 
 
-const Faculty = () => {
+const HODMain = () => {
     const [dateTime, setDateTime] = useState(new Date());
-    const [showApplyForm, setShowApplyForm] = useState(false);
-
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -173,17 +161,10 @@ const Faculty = () => {
       return date.toLocaleTimeString('en-US', options);
     };
 
-    const renderForm = () => {
-        setShowApplyForm(true);
-      };
-    
-      const closeForm = () => {
-        setShowApplyForm(false);
-      };
 return(
     <div className="hod-main-container">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
-       <Header/>
+        <Hodheader/>
             <div className="nav-container">
             <div className='top-container'>
                 <div >
@@ -198,43 +179,55 @@ return(
                     </div>
                     <p className='description'> {formatDate(dateTime)} &  {formatTime(dateTime)}</p>   
                 </div>
-            </div>
-         
-            </div>
-            <h2 className="nav-bar-title- sub-t">Leave
-                    <span> History</span></h2>
-
-                    <div className='blue-line-container-2'>
-                        <li className='blue-dot'></li>
-                        <li className='blue-dot'></li>
-                        <li className='blue-dot'></li>
-                        <div className='blue-line'></div>
-                    </div>
                 
-            <div className='data-container'>
-            <div className='table-header'>
-                <p>S.No</p>
-                <p>Leave Start Date</p>
-                <p>Leave End Date</p>
-                <p>Type</p>
-                <p>Status</p>
-                <p>Approved By</p>
-                <p>Total Days</p>
-                <p>Cancel</p>
+            </div>
+            <div className='count-containers'>
+                <div className='count-container-1'>
+                <p className='card-description'>New Requests</p>
+                <p className='count-txt'>53</p>
+                </div>
+                <div className='count-container-1'>
+                <p className='card-description'>Remaining Earn Leaves</p>
+                <p className='count-txt'>5</p>
+                </div>
 
+                <div className='count-container-2'>
+                <p className='card-description'>Remaining Medical Leaves</p>
+                <p className='count-txt-2'>4</p>
+                </div>
+
+                <div className='count-container-3'>
+                <p className='card-description'>Remaining Casual Leaves</p>
+                <p className='count-txt-3'>3</p>
+                </div>
+
+                <div className='count-container-4'>
+                <p className='card-description'>
+                Remaining Meternity Leaves</p>
+                <p className='count-txt-4'>1</p>
+                </div>
+
+                <div className='count-container-5'>
+                <p className='card-description'>
+                Remaining One Hour Leaves</p>
+                <p className='count-txt-5'>1</p>
+                </div>
+
+                <div className='count-container-6'>
+                <p className='card-description'>
+                Remaining Special Casual Leaves</p>
+                <p className='count-txt-6'>1</p>
+                </div>
             
 
-            </div>
-                {sampleData.map(eachData => (
-                    <HistoryLeave key={eachData.id} data={eachData}/>
-                ))}
-            </div>
+                
             </div>
 
-   
-)
-
+            </div>
+          
+                
+            
+    </div>)
 
 }
-
-export default Faculty
+export default HODMain
