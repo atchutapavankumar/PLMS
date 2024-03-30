@@ -1,15 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header'
+import Header from '../Header';
+
 
 const ApplyLeaveForm = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
-    const [formData, setFormData] = useState({
-        name: "",
-        leavetype: "",
-        startDate: "",
-        expiryDate: ""
-    });
+    const [userName, setUserName] = useState("K. Srinivasa Rao");
+    const [leaveType, setLeaveType] = useState("Casual");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setExpiryDate] = useState("");
+    const [userId, setUserId] = useState("BEC071008");
+    const [reason, setReason] = useState();
+    
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+      
+        try {
+          const response = await fetch('http://localhost:3030/api/apply-leave', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userName,
+                leaveType,
+                startDate,
+                endDate,
+                reason,
+                userId
+            }),
+          }
+
+          );
+      
+          const data = await response.json();
+          localStorage.setItem("userId", data.userId);
+      
+          if (response.ok) {
+            console.log('Leave Applied successfully', data);
+            alert("Leave Applied successfully")
+          } else {
+            console.error('Leave Apply failed:');
+          }
+        } catch (error) {
+          console.error('Error Applying leave user:', error.message);
+        }
+      };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,76 +61,129 @@ const ApplyLeaveForm = () => {
         return date.toLocaleDateString('en-US', options);
     };
 
-    const formatTime = (date) => {
-        const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-        return date.toLocaleTimeString('en-US', options);
-    };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        switch (name) {
+            case "userName":
+                setUserName(value);
+                break;
+            case "leaveType":
+                setLeaveType(value);
+                break;
+            case "startDate":
+                setStartDate(value);
+                break;
+            case "expiryDate":
+                setExpiryDate(value);
+                break;
+            case "userId":
+                setUserId(value);
+                break;
+            case "reason":
+                setReason(value);
+                break;
+            default:
+                break;
+        }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your form submission logic here
-    };
+    const handleNameChange = (event) => {
+        setUserName(event.target.value)
+    }
 
+    const handleReason= (event) => {
+        setReason(event.target.value)
+    }
+
+    const handleLeaveType = (event) => {
+        setLeaveType(event.target.value)
+    }
+
+    const handleUserId = (event) => {
+        setUserId(event.target.value)
+    }
     return (
         <div className="hod-main-container">
             <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
-            <Header/>
+            <Header />
             <div className="nav-container">
                 <h2 className="nav-bar-title sub-t">Leave <span>Application</span></h2>
                 <div className='data-container'>
                     <div className="create-task-popup-container">
                         <h4 className="Form-Title">Apply Leave</h4>
                         <div className="create-task-form-container">
-                            <form className="create-task-form" onSubmit={handleSubmit}>
+                            <form className="create-task-form" >
                                 <div className="create-task-form-input">
                                     <label htmlFor="name">Name</label>
                                     <select
                                         id="name"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
+                                        name="userName"
+                                        value={userName}
+                                        onChange ={handleNameChange}
                                         className="task-input-field"
                                     >
-                                    <option value="N. Sivaram Prasad" selected={formData.name === "N. Sivaram Prasad"}>N. Sivaram Prasad</option>
-<option value="K. Srinivasa Rao" selected={formData.name === "K. Srinivasa Rao"}>K. Srinivasa Rao</option>
-<option value="P. A. V Krishna Rao" selected={formData.name === "P. A. V Krishna Rao"}>P. A. V Krishna Rao</option>
-<option value="G. Prasad" selected={formData.name === "G. prasad"}>G. Prasad</option>
-<option value="K. Bhaskara Rao" selected={formData.name === "K. Bhaskara Rao"}>K. Bhaskara Rao</option>
-<option value="B. Krishnaiah" selected={formData.name === "B. Krishnaiah"}>B. Krishnaiah</option>
-<option value="M. Praveen Kumar" selected={formData.name === "M. Praveen Kumar"}>M. Praveen Kumar</option>
-<option value="N. Srinivasa Rao" selected={formData.name === "N. Srinivasa Rao"}>N. Srinivasa Rao</option>
-<option value="K. Sai Prasanth" selected={formData.name === "K. Sai Prasanth"}>K. Sai Prasanth</option>
-<option value="P. Ratna Prakash" selected={formData.name === "P. Ratna Prakash"}>P. Ratna Prakash</option>
-<option value="P. Ravi Kumar" selected={formData.name === "P. Ravi Kumar"}>P. Ravi Kumar</option>
-<option value="K. Suresh Kumar" selected={formData.name === "K. Suresh Kumar"}>K. Suresh Kumar</option>
-<option value="S. Ratna Babu" selected={formData.name === "S. Ratna Babu"}>S. Ratna Babu</option>
-<option value="Mastanaiah Naidu Yasam" selected={formData.name === "Mastanaiah Naidu Yasam"}>Mastanaiah Naidu Yasam</option>
-<option value="P. Sreedhar" selected={formData.name === "P. Sreedhar"}>P. Sreedhar</option>
-<option value="BBK. Prasad" selected={formData.name === "BBK. Prasad"}>BBK. Prasad</option>
-<option value="Surekha Peravali" selected={formData.name === "Surekha Peravali"}>Surekha Peravali</option>
-
-                                        {/* Options for name */}
+                                       <option value="N. Sivaram Prasad">N. Sivaram Prasad</option>
+                                                            <option value="K. Srinivasa Rao">K. Srinivasa Rao</option>
+                                                            <option value="P. A. V Krishna Rao">P. A. V Krishna Rao</option>
+                                                            <option value="G. Prasad">G. Prasad</option>
+                                                            <option value="K. Bhaskara Rao">K. Bhaskara Rao</option>
+                                                            <option value="B. Krishnaiah">B. Krishnaiah</option>
+                                                            <option value="M. Praveen Kumar">M. Praveen Kumar</option>
+                                                            <option value="N. Srinivasa Rao">N. Srinivasa Rao</option>
+                                                            <option value="K. Sai Prasanth">K. Sai Prasanth</option>
+                                                            <option value="P. Ratna Prakash">P. Ratna Prakash</option>
+                                                            <option value="P. Ravi Kumar">P. Ravi Kumar</option>
+                                                            <option value="K. Suresh Kumar">K. Suresh Kumar</option>
+                                                            <option value="S. Ratna Babu">S. Ratna Babu</option>
+                                                            <option value="Mastanaiah Naidu Yasam">Mastanaiah Naidu Yasam</option>
+                                                            <option value="P. Sreedhar">P. Sreedhar</option>
+                                                            <option value="BBK. Prasad">BBK. Prasad</option>
+                                                            <option value="Surekha Peravali">Surekha Peravali</option>
                                     </select>
-                                    <label htmlFor="leavetype">Leave Type</label>
+                                    <label htmlFor="name">User Id</label>
                                     <select
-                                        id="leavetype"
-                                        name="leavetype"
-                                        value={formData.leavetype}
-                                        onChange={handleChange}
+                                        id="userid"
+                                        name="userid"
+                                        value={userId}
+                                        onChange ={handleUserId}
                                         className="task-input-field"
                                     >
-                                       <option value="Casual Leave" selected={formData.category === "Casual Leave"}>Casual Leave</option>
-<option value="Earn Leave" selected={formData.category === "Earn Leave"}>Earn Leave</option>
-<option value="One Hour" selected={formData.category === "One Hour"}>One Hour</option>
-<option value="Medical Leave" selected={formData.category === "Medical Leave"}>Medical Leave</option>
-<option value="Meternity Leave" selected={formData.category === "Meternity Leave"}>Meternity Leave</option>
-<option value="Special Casual Leave" selected={formData.category === "Special Casual Leave"}>Special Casual Leave</option>
+                                     <option value="BEC071008"> BEC071008</option>
+                                            <option value="BEC071010"> BEC071010</option>
+                                            <option value="BEC071012"> BEC071012</option>
+                                            <option value="BEC071013"> BEC071013</option>
+                                            <option value="BEC071017"> BEC071017</option>
+                                            <option value="BEC071018"> BEC071018</option>
+                                            <option value="BEC071019"> BEC071019</option>
+                                            <option value="BEC071020"> BEC071020</option>
+                                            <option value="BEC071004"> BEC071004</option>
+                                            <option value="BEC071005"> BEC071005</option>
+                                            <option value="BEC071007"> BEC071007</option>
+                                            <option value="BEC071009"> BEC071009</option>
+                                            <option value="BEC071001"> BEC071001</option>
+                                            <option value="BEC071002"> BEC071002</option>
+                                            <option value="BEC071003"> BEC071003</option>
+                                            <option value="BEC071006"> BEC071006</option>
 
+                                    </select>
+
+                                    
+                                    <label htmlFor="leaveType">Leave Type</label>
+                                    <select
+                                        id="leaveType"
+                                        name="leaveType"
+                                        value={leaveType}
+                                        onChange={handleLeaveType}
+                                        className="task-input-field"
+                                    >
+                                         <option value="Casual Leave">Casual Leave</option>
+                                            <option value="Earn Leave">Earn Leave</option>
+                                            <option value="One Hour">One Hour</option>
+                                            <option value="Medical Leave">Medical Leave</option>
+                                            <option value="Meternity Leave">Meternity Leave</option>
+                                            <option value="Special Casual Leave">Special Casual Leave</option>
                                     </select>
                                 </div>
                                 <br />
@@ -104,7 +194,7 @@ const ApplyLeaveForm = () => {
                                             type="date"
                                             id="startDate"
                                             name="startDate"
-                                            value={formData.startDate}
+                                            value={startDate}
                                             onChange={handleChange}
                                             className="task-input-field"
                                         />
@@ -116,17 +206,29 @@ const ApplyLeaveForm = () => {
                                             type="date"
                                             id="expiryDate"
                                             name="expiryDate"
-                                            value={formData.expiryDate}
+                                            value={endDate}
                                             onChange={handleChange}
+                                            className="task-input-field"
+                                        />
+                                    </div>
+
+                                    <div className="create-task-form-input">
+                                        <label htmlFor="reason">Reason</label>
+                                        <input
+                                            type="text"
+                                            id="reason"
+                                            name="reason"
+                                            value={reason}
+                                            onChange={handleReason}
                                             className="task-input-field"
                                         />
                                     </div>
                                 </div>
                                 <div className="btn-container-pop">
-                                    <button type="submit" className="create-btn">
+                                    <button type="submit" className="create-btn" onClick={handleSubmit}>
                                         Apply Self
                                     </button>
-                                    <button type="submit" className="create-btn">
+                                    <button type="submit" className="create-btn" onClick={handleSubmit}>
                                         Apply For Others
                                     </button>
                                 </div>
@@ -137,6 +239,6 @@ const ApplyLeaveForm = () => {
             </div>
         </div>
     );
-}
 
+    }
 export default ApplyLeaveForm;

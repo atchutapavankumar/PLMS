@@ -51,7 +51,6 @@ const ApplyHeader = (props) => {
       options
     )
     const json = await response.json()
-    console.log(json)
     if (response.ok) {
       setLoading(false)
       toast.success("Task Created")

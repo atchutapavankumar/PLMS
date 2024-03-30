@@ -2,7 +2,6 @@ import './index.css'
 
 const HistoryLeave = (props) => {
     const {data} = props
-    console.log(data)
 return (
     <div className='table-row'>
         <p>{data.sl}</p>

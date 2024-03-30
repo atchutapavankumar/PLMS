@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -15,23 +16,24 @@ const settings = {
   autoplaySpeed: 2000,
 };
 
-const LoginForm = () => {
-  const [username, setUsername] = useState('');
+const Login = () => {
   const [password, setPassword] = useState('');
+  const [gmail, setGmail] = useState('');
   const [showSubmitError, setShowSubmitError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
-  const onChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
 
   const onChangePassword = (event) => {
     setPassword(event.target.value);
   };
 
-  const onSubmitSuccess = () => {
-    navigate('/home');
+  const onChangeGmail= (event) => {
+    setGmail(event.target.value);
+  };
+
+  const onSubmitSuccess = (arg) => {
+    navigate(`/${arg}`);
   };
 
   const onSubmitFailure = (errorMsg) => {
@@ -39,16 +41,47 @@ const LoginForm = () => {
     setErrorMsg(errorMsg);
   };
 
+ 
   const submitForm = async (event) => {
     event.preventDefault();
-
-    if (username === 'sample' && password === 'sample') {
-      console.log('User credentials are valid');
-      onSubmitSuccess();
-    } else {
-      onSubmitFailure('Invalid username or password');
+  
+    try {
+        const response = await fetch('http://localhost:3030/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                password: password,
+                gmail: gmail,
+            }),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+            console.log('User Logged successfully');
+            console.log(data); // data contains the user details
+            // Store user details in local storage
+            localStorage.setItem('user', JSON.stringify(data));
+            if (data.position === 'Faculty'){
+              onSubmitSuccess("faculty-main");
+            }else if (data.position === 'HOD'){
+              onSubmitSuccess("hod-main");
+            }else if (data.position === 'Principal'){
+              onSubmitSuccess("principal");
+            }else if (data.position === 'Admin'){
+              onSubmitSuccess("admin")
+            }
+        } else {
+            console.error('Login failed:', data.message);
+            onSubmitFailure(data.message);
+        }
+    } catch (error) {
+        console.error('Error registering user:', error.message);
+        onSubmitFailure('An error occurred while registering');
     }
-  };
+};
 
   const renderPasswordField = () => {
     return (
@@ -68,40 +101,26 @@ const LoginForm = () => {
     );
   };
 
-  const renderSelectedField = () => {
+
+  const renderGmailField = () => {
     return (
       <>
-        <label className="input-label" htmlFor="username">
-          LOGIN AS
-        </label>
-        <select class="username-input-field">
-            <option value="Faculty">Faculty</option>
-            <option value="Faculty">HOD</option>
-            <option value="Faculty">Principal</option>
-            <option value="Faculty">Admin</option>
-
-        </select>
-    </>);};
-
-
-
-  const renderUsernameField = () => {
-    return (
-      <>
-        <label className="input-label" htmlFor="username">
-          USERNAME
+        <label className="input-label" htmlFor="gmail">
+          Gmail
         </label>
         <input
           type="text"
-          id="username"
+          id="gmail"
           className="username-input-field"
-          value={username}
-          onChange={onChangeUsername}
-          placeholder="Username"
+          value={gmail}
+          onChange={onChangeGmail}
+          placeholder="Gmail"
         />
       </>
     );
   };
+
+
 
   return (
     <>
@@ -109,15 +128,21 @@ const LoginForm = () => {
 
     <div className="login-form-container">
       <form className="form-container" onSubmit={submitForm}>
-        <div className="input-container">{renderUsernameField()}</div>
+        <div className="input-container">{renderGmailField()}</div>
         <div className="input-container">{renderPasswordField()}</div>
-        <div className="input-container">{renderSelectedField()}</div>
-
-
-        <button type="submit" className="login-button">
+       <Link to="/"  className='link-item'>
+        <button type="submit" className="login-button" onClick={submitForm}>
           Login
         </button>
+        </Link>
         {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+        or
+        <Link to="/sign-up" className='link-item'>
+        <button type="submit" className="login-button">
+          Register
+        </button>
+        </Link>
+        
       </form>
 
       <div className="slider-container">
@@ -139,4 +164,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

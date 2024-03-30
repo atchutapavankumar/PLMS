@@ -153,6 +153,7 @@ import ApplyHeader from '../ApplyHeader';
 const Faculty = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
+    const [historyData, setHistoryData] = useState(sampleData);  
 
 
     useEffect(() => {
@@ -162,6 +163,41 @@ const Faculty = () => {
   
       return () => clearInterval(interval);
     }, []);
+
+    // useEffect(() => {
+    //     fetchData();
+    // })
+
+
+    // const fetchData = async () => {
+    //    const user = JSON.parse(localStorage.getItem('user'));
+
+    //    console.log(user.userId);
+    // try {
+    //     const response = await fetch('http://localhost:3030/get/leaves', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             userId: user.userId,
+    //         }),
+    //     });
+  
+    //     const data = await response.json();
+  
+    //     if (response.ok) {
+    //         console.log('User History successfully fetched');
+    //         setHistoryData(data)
+    //         console.log(data); // data contains the user details
+    //         // Store user details in local storages
+    //     } else {
+    //         console.error('User History failed fetching:', data.message);
+    //     }
+    // } catch (error) {
+    //     console.error('Error registering user:', error.message);
+    // }
+    // }
   
     const formatDate = (date) => {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -225,7 +261,7 @@ return(
             
 
             </div>
-                {sampleData.map(eachData => (
+                {historyData.map(eachData => (
                     <HistoryLeave key={eachData.id} data={eachData}/>
                 ))}
             </div>

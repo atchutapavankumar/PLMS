@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Faculty from "./components/Faculty";
-import LoginForm from "./components/Login";
+import Login from "./components/Login";
 import ApplyForm from "./components/ApplyHeader";
 import HOD from "./components/HOD";
 import Principal from "./components/Principal";
@@ -13,13 +13,17 @@ import FacultyRequests from "./components/FacultyRequests";
 import HodApplyLeaveForm from "./components/HodApplyLeaveForm";
 import FacultyMain from "./components/FacultyMain";
 import HODMain from "./components/HODMain";
+import Profile from  "./components/Profile";
+import Register from "./components/Register";
+import WorkLoadView from "./components/WorkLoadView";
 
 const App = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/faculty-history" element={<Faculty />} />
-      <Route path="/" element={<LoginForm />} />
-      <Route path="/apply" element={<ApplyForm />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/sign-up" element={<Register/>}/>
+      {/* <Route path="/apply" element={<ApplyForm />} /> */}
       <Route path="/hod" element={<HOD />} />
       <Route path="/principal" element={<Principal/>}/>
       <Route path="/admin" element={<AdminPage/>}/>
@@ -30,11 +34,10 @@ const App = () => (
       <Route path="/class-requests" element={<FacultyRequests/>}/>
       <Route path="/faculty-main" element={<FacultyMain/>}/>
       <Route path="/hod-main" element={<HODMain/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/faculty-profile" element={<Profile/>}/>
 
-
-
-
-
+      <Route path="/work-load" element={<WorkLoadView/>}/>
 
     </Routes>
   </BrowserRouter>
