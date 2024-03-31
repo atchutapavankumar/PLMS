@@ -1,4 +1,4 @@
-.table-row{
+/* .table-row{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -27,4 +27,55 @@
     border-radius: 5px;
     text-align: center;
     height:25px;
+}
+
+.work-load-form{
+    border-style:solid;
+}
+.table-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style:solid;
+    width:70vw;
+}
+.table-row{
+    display: flex;
+    flex-direction: row;
+    border-style:solid;
+    
+}
+
+.table-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%;
+    border-width:1px;
+    border-radius:5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #9d2da2;
+    color:white;
+    margin-top:30px;
+} */
+
+
+.send-btn{
+    background-color: lightgreen;
+    font-family:"Montserrat", Sans-serif ;
+    padding:7px;
+    padding-left:20px;
+    padding-right:20px;
+    border-width: 0px;
+    border-radius: 7px;
+    height:30px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+.drop-down{
+    height:30px;
+    width:auto;
+    margin-top:auto;
+    margin-bottom:auto
 }

@@ -2,17 +2,15 @@ import './index.css'
 
 const HistoryLeave = (props) => {
     const {data} = props
-    console.log(data)
 return (
     <div className='table-row'>
-        <p>{data.sl}</p>
-        <p>{data.start}</p>
-        <p>{data.end}</p>
-        <p>{data.type}</p>
-        <p class="approved">Approved</p>
-        <p>HOD</p>
-        <p>{data.totalDays}</p>
+        <p>{data.startDate}</p>
+        <p>{data.endDate}</p>
+        <p>{data.leaveType}</p>
+        <p class="approved">{data.leaveStatus}</p>
+        <p class="">{data.reason}</p>
         <p class="cancel">Cancel</p>
+
 
 
 

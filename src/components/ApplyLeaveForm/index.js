@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
+import WorkLoadView from '../WorkLoadView';
 
 
 const ApplyLeaveForm = () => {
@@ -11,6 +12,43 @@ const ApplyLeaveForm = () => {
     const [endDate, setExpiryDate] = useState("");
     const [userId, setUserId] = useState("BEC071008");
     const [reason, setReason] = useState();
+    const  [showWorkLoad, setWorkLoad] = useState(true)
+    const [workLoadData, setWorkLoadData] = useState({});
+
+
+
+    const fetchWorkLoad = async () => {
+        try {
+            const res = await fetch('http://localhost:3030/api/workload/schedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    startDate,
+                    endDate,
+                    userId
+                }),
+            });
+    
+            const data = await res.json();
+            localStorage.setItem("userId", data.userId);
+    
+            if (res.ok) {
+                console.log('Workload fetched successfully', data);
+                setWorkLoad(!showWorkLoad);
+                setWorkLoadData(data);
+                alert("Workload fetched successfully");
+            } else {
+                console.error('Leave fetching failed:');
+            }
+        } catch (error) {
+            console.error('Error fetching workload:', error.message);
+        }
+    };
+    
+
+    
     
 
     const handleSubmit = async (event) => {
@@ -39,7 +77,9 @@ const ApplyLeaveForm = () => {
       
           if (response.ok) {
             console.log('Leave Applied successfully', data);
+            setWorkLoad(!showWorkLoad)
             alert("Leave Applied successfully")
+            fetchWorkLoad();
           } else {
             console.error('Leave Apply failed:');
           }
@@ -104,6 +144,9 @@ const ApplyLeaveForm = () => {
     const handleUserId = (event) => {
         setUserId(event.target.value)
     }
+
+
+
     return (
         <div className="hod-main-container">
             <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
@@ -235,7 +278,11 @@ const ApplyLeaveForm = () => {
                             </form>
                         </div>
                     </div>
+                
                 </div>
+                 <div className='work-load-form'>
+                 <WorkLoadView workLoadData={workLoadData} />
+                 </div>
             </div>
         </div>
     );

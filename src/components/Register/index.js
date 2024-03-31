@@ -43,9 +43,18 @@ const Register = () => {
     setGmail(event.target.value);
   };
 
-  const onSubmitSuccess = () => {
+  const onSubmitSuccess = (args) => {
+    if (args.position === 'Faculty'){
     navigate('/faculty-main');
-  };
+    } else if (args.position === 'HOD'){
+      navigate('/hod-main');
+    } else if (args.position === 'Principal'){
+      navigate('/principal');
+  }else if (args.position === 'Admin') {
+    navigate('/admin')
+  }
+}
+  ;
 
   const onSubmitFailure = (errorMsg) => {
     setShowSubmitError(true);
@@ -78,7 +87,8 @@ const Register = () => {
   
       if (response.ok) {
         console.log('User registered successfully');
-        onSubmitSuccess();
+        localStorage.setItem("user", JSON.stringify(data))
+        onSubmitSuccess(data);
       } else {
         console.error('Registration failed:', data.message);
         onSubmitFailure(data.message);
@@ -115,9 +125,9 @@ const Register = () => {
         </label>
         <select class="username-input-field" onChange={onSelectField}>
             <option value="Faculty">Faculty</option>
-            <option value="Faculty">HOD</option>
-            <option value="Faculty">Principal</option>
-            <option value="Faculty">Admin</option>
+            <option value="HOD">HOD</option>
+            <option value="Principal">Principal</option>
+            <option value="Admin">Admin</option>
 
         </select>
     </>);};

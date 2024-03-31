@@ -285,3 +285,10 @@
 .table-header p{
     width:100px;
 }
+.work-load-form{
+    border-style:solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

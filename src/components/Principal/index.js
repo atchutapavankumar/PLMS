@@ -1,7 +1,8 @@
 import './index.css'
 import React, { useState, useEffect } from 'react';
 import ApplyHeader from '../ApplyHeader';
-import LeaveRequestsCard from '../LeaveRequestsCard';
+import PrincipalLeaveRequestsCard from '../PrincipalLeaveRequestCard';
+
     const sampleData = [
         {
             id: 'BEC071001',
@@ -140,8 +141,10 @@ import LeaveRequestsCard from '../LeaveRequestsCard';
 
 const Principal = () => {
     const [dateTime, setDateTime] = useState(new Date());
+    const [reqData, setReqData] = useState([])
 
     useEffect(() => {
+        fetchReqData();
       const interval = setInterval(() => {
         setDateTime(new Date());
       }, 1000);
@@ -149,6 +152,11 @@ const Principal = () => {
       return () => clearInterval(interval);
     }, []);
   
+    const fetchReqData = async () => {
+        const res = await fetch("http://localhost:3030/get/hodapproved/leaves")
+        const data = await res.json();
+        setReqData(data)
+} 
     const formatDate = (date) => {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       return date.toLocaleDateString('en-US', options);
@@ -223,8 +231,8 @@ return(
                     </div>
                 
             <div className='data-container'>
-                {sampleData.map(eachData => (
-                    <LeaveRequestsCard key={eachData.id} data={eachData}/>
+                {reqData.map(eachData => (
+                    <PrincipalLeaveRequestsCard key={eachData.id} data={eachData}/>
                 ))}
             </div>
     </div>)

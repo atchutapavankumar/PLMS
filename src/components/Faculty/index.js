@@ -153,7 +153,7 @@ import ApplyHeader from '../ApplyHeader';
 const Faculty = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
-    const [historyData, setHistoryData] = useState(sampleData);  
+    const [historyData, setHistoryData] = useState([]);  
 
 
     useEffect(() => {
@@ -164,40 +164,40 @@ const Faculty = () => {
       return () => clearInterval(interval);
     }, []);
 
-    // useEffect(() => {
-    //     fetchData();
-    // })
+    useEffect(() => {
+        fetchData();
+    })
 
 
-    // const fetchData = async () => {
-    //    const user = JSON.parse(localStorage.getItem('user'));
+    const fetchData = async () => {
 
-    //    console.log(user.userId);
-    // try {
-    //     const response = await fetch('http://localhost:3030/get/leaves', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             userId: user.userId,
-    //         }),
-    //     });
+       const user = localStorage.getItem('userId');
+
+       console.log(user);
+    try {
+        const response = await fetch('http://localhost:3030/get/leaves', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: user,
+            }),
+        });
   
-    //     const data = await response.json();
+        const data = await response.json();
   
-    //     if (response.ok) {
-    //         console.log('User History successfully fetched');
-    //         setHistoryData(data)
-    //         console.log(data); // data contains the user details
-    //         // Store user details in local storages
-    //     } else {
-    //         console.error('User History failed fetching:', data.message);
-    //     }
-    // } catch (error) {
-    //     console.error('Error registering user:', error.message);
-    // }
-    // }
+        if (response.ok) {
+            console.log('User History successfully fetched');
+            setHistoryData(data)
+            // Store user details in local storages
+        } else {
+            console.error('User History failed fetching:', data.message);
+        }
+    } catch (error) {
+        console.error('Error registering user:', error.message);
+    }
+    }
   
     const formatDate = (date) => {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -249,13 +249,11 @@ return(
                 
             <div className='data-container'>
             <div className='table-header'>
-                <p>S.No</p>
                 <p>Leave Start Date</p>
                 <p>Leave End Date</p>
                 <p>Type</p>
                 <p>Status</p>
-                <p>Approved By</p>
-                <p>Total Days</p>
+                <p>Reason</p>
                 <p>Cancel</p>
 
             

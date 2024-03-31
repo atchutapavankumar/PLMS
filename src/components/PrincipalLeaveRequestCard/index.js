@@ -1,7 +1,7 @@
 import './index.css'
 import { useEffect, useState } from 'react';
 
-const LeaveRequestsCard = (props) => {
+const PrincipalLeaveRequestsCard = (props) => {
     const {data} = props;
 
     const approveLeave = async () => {
@@ -13,7 +13,7 @@ const LeaveRequestsCard = (props) => {
             },
             body: JSON.stringify({
                 userId: userId,
-                leaveStatus: 'HOD-Approved',
+                leaveStatus: 'Approved',
             }),
         });
   
@@ -62,4 +62,4 @@ const LeaveRequestsCard = (props) => {
     )
 }
 
-export default LeaveRequestsCard;
+export default PrincipalLeaveRequestsCard;

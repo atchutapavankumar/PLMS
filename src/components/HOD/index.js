@@ -142,8 +142,12 @@ const sampleData = [
 
 const HOD = () => {
     const [dateTime, setDateTime] = useState(new Date());
+    const [requestsData, setRequestsData] = useState([])
+
 
     useEffect(() => {
+        fetchRequestsData()
+
       const interval = setInterval(() => {
         setDateTime(new Date());
       }, 1000);
@@ -151,6 +155,11 @@ const HOD = () => {
       return () => clearInterval(interval);
     }, []);
   
+    const fetchRequestsData = async () => {
+        const res = await fetch("http://localhost:3030/get/pending/leaves")
+        const data = await res.json();
+        setRequestsData(data)
+} 
     const formatDate = (date) => {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       return date.toLocaleDateString('en-US', options);
@@ -201,7 +210,7 @@ return(
                     </div>
                 
             <div className='data-container'>
-                {sampleData.map(eachData => (
+                {requestsData.map(eachData => (
                     <LeaveRequestsCard key={eachData.id} data={eachData}/>
                 ))}
             </div>

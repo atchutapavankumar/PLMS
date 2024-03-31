@@ -61,7 +61,6 @@ const Login = () => {
   
         if (response.ok) {
             console.log('User Logged successfully');
-            console.log(data); // data contains the user details
             // Store user details in local storage
             localStorage.setItem('user', JSON.stringify(data));
             if (data.position === 'Faculty'){
