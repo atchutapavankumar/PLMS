@@ -88,6 +88,8 @@ const Register = () => {
       if (response.ok) {
         console.log('User registered successfully');
         localStorage.setItem("user", JSON.stringify(data))
+        localStorage.setItem("userId", userId)
+
         onSubmitSuccess(data);
       } else {
         console.error('Registration failed:', data.message);
