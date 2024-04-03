@@ -185,7 +185,7 @@ const Register = () => {
           className="username-input-field"
           value={userId}
           onChange={onChangeUserId}
-          placeholder="Gmail"
+          placeholder="UserId"
         />
       </>
     );

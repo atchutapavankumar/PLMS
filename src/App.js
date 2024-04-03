@@ -36,6 +36,8 @@ const App = () => (
       <Route path="/hod-main" element={<HODMain/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/faculty-profile" element={<Profile/>}/>
+      <Route path="/hod-profile" element={<Profile/>}/>
+
 
       <Route path="/work-load" element={<WorkLoadView/>}/>
 
