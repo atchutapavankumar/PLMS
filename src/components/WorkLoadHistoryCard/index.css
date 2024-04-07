@@ -1,0 +1,30 @@
+.table-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%;
+    border-width:0.5px;
+    border-radius:5px;
+    margin-top:1px;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.table-row p{
+    width:100px;
+}
+.approved{
+    padding:5px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    text-align: center;
+    height:25px;
+}
+
+.cancel{
+    padding:5px;
+    background-color: silver;
+    border-radius: 5px;
+    text-align: center;
+    height:25px;
+}

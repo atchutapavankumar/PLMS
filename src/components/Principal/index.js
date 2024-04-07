@@ -2,6 +2,7 @@ import './index.css'
 import React, { useState, useEffect } from 'react';
 import ApplyHeader from '../ApplyHeader';
 import PrincipalLeaveRequestsCard from '../PrincipalLeaveRequestCard';
+import { LinkItem } from '../Header/StyledComponents';
 
     const sampleData = [
         {
@@ -167,6 +168,8 @@ const Principal = () => {
       return date.toLocaleTimeString('en-US', options);
     };
 
+    const userdata = JSON.parse(localStorage.getItem('user'))
+    const {username, userId} = userdata
 return(
     <div className="hod-main-container">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
@@ -188,9 +191,16 @@ return(
                 <div className='profile-username'>
                 <img src={sampleData[0].profile} alt={sampleData[0].id} className='profile-image'/>
                 <div className='name-id'>
-                <div className='name'>Principal Name  <br/><span className='id'>{sampleData[0].id}</span>
+                <div className='name'>{username} <br/><span className='id'>{userId}</span>
                 <br/>
+                <div className='principal-card-nav'>
                 <p className='designtion'>Pricipal</p>
+                <LinkItem to="/hod-apply-leave-form"><p>Apply Leave</p></LinkItem>
+
+                <p className='designtion'>Logout</p>
+                </div>
+
+                
 </div>
             </div>
             </div>

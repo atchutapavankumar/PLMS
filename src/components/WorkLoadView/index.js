@@ -1,17 +1,75 @@
-import React from 'react';
-import './index.css'
+import React, { useState, useEffect } from 'react';
+import './index.css';
 
 const WorkLoadView = ({ workLoadData }) => {
+    const [sentData, setSentData] = useState({});
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        // Fetch user data from local storage when component mounts
+        const user = JSON.parse(localStorage.getItem('user'));
+        setUserData(user);
+    }, []);
+
     // Function to send data to the API
-    const sendDataToAPI = (rowData) => {
-        // Here you can implement the logic to send the data to your API
-        console.log("Sending data to API:", rowData);
+    const sendDataToAPI = async (rowData, rowIndex) => {
+        try {
+            // Perform fetch POST request to your API endpoint
+            console.log(rowData)
+            const response = await fetch('http://localhost:3030/api/workload/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(rowData)
+            });
+
+            if (response.ok) {
+                console.log('Data sent successfully:', rowData);
+                alert("Request sent successfully");
+                return true;
+            } else {
+                console.error('Error sending data:', response.statusText);
+                alert("Error in sending Request");
+                return false;
+            }
+        } catch (error) {
+            console.error('Error sending data:', error.message);
+            alert("Error in sending Request");
+            return false;
+        }
     };
 
-    // Event handler for the "Send" button
-    const handleSendClick = (rowData) => {
-        sendDataToAPI(rowData);
-    };
+   // Event handler for the "Send" button
+const handleSendClick = async (rowData, rowIndex) => {
+    if (!userData) {
+        console.error('User data not found in local storage');
+        return;
+    }
+
+    try {
+        // Get the selected option value
+        const selectedOption = document.getElementById(`select-${rowIndex}`).value;
+
+        // Add the selected option value to the rowData
+        rowData.assign = selectedOption;
+
+        const payload = {
+            ...rowData,
+            userId: userData.userId,
+            username: userData.username
+        };
+
+        const isSent = await sendDataToAPI(payload, rowIndex);
+
+        if (isSent) {
+            // Update sentData state to mark this row as sent
+            setSentData({ ...sentData, [rowIndex]: true });
+        }
+    } catch (error) {
+        console.error('Error handling send click:', error);
+    }
+};
 
     return (
         <div className='admin-main-container'>
@@ -26,6 +84,7 @@ const WorkLoadView = ({ workLoadData }) => {
                 <div className='work-load-form'>
                     <div className='table-container'>
                         <div className='table-header'>
+                        <p>Date</p>
                             <p>Day</p>
                             <p>Period</p>
                             <p>Class</p>
@@ -33,45 +92,48 @@ const WorkLoadView = ({ workLoadData }) => {
                             <p>Staff</p>
                             <p>Send Request</p>
                         </div>
-                        {Object.entries(workLoadData).map(([day, periods]) => (
+                        {Object.entries(workLoadData).map(([day, periods], dayIndex) => (
                             <div key={day}>
-                                {periods.map((period, index) => (
-                                    <div key={index} className='table-row'>
-                                        <p>{day}</p>
+                                {periods.map((period, periodIndex) => (
+                                    <div key={periodIndex} className='table-row'>
+                                    <p>{day}</p>
+                                    <p>{period.day}</p>
                                         <p>{period.period}</p>
                                         <p>{period.class}</p>
                                         <p>{period.sub}</p>
-                                        <select id="name" name="name" className="drop-down">
-                                            <option value="N. Sivaram Prasad" >N. Sivaram Prasad</option>
-                                            <option value="K. Srinivasa Rao" >K. Srinivasa Rao</option>
-                                            <option value="P. A. V Krishna Rao" >P. A. V Krishna Rao</option>
-                                            <option value="G. Prasad" >G. Prasad</option>
-                                            <option value="K. Bhaskara Rao" >K. Bhaskara Rao</option>
-                                            <option value="B. Krishnaiah" >B. Krishnaiah</option>
-                                            <option value="M. Praveen Kumar" >M. Praveen Kumar</option>
-                                            <option value="N. Srinivasa Rao" >N. Srinivasa Rao</option>
-                                            <option value="K. Sai Prasanth" >K. Sai Prasanth</option>
-                                            <option value="P. Ratna Prakash" >P. Ratna Prakash</option>
-                                            <option value="P. Ravi Kumar" >P. Ravi Kumar</option>
-                                            <option value="K. Suresh Kumar">K. Suresh Kumar</option>
-                                            <option value="S. Ratna Babu" >S. Ratna Babu</option>
-                                            <option value="Mastanaiah Naidu Yasam" >Mastanaiah Naidu Yasam</option>
-                                            <option value="P. Sreedhar" >P. Sreedhar</option>
-                                            <option value="BBK. Prasad" >BBK. Prasad</option>
-                                            <option value="Surekha Peravali" >Surekha Peravali</option>
+                                        <select id={`select-${dayIndex}-${periodIndex}`} name="name" className="drop-down">
+                                            <option value="BEC071002">K. Srinivasa Rao</option>
+                                            <option value="BEC071003">P. A. V Krishna Rao</option>
+                                            <option value="BEC071004">G. Prasad</option>
+                                            <option value="BEC071005">K. Bhaskara Rao</option>
+                                            <option value="BEC071006">B. Krishnaiah</option>
+                                            <option value="BEC071007">M. Praveen Kumar</option>
+                                            <option value="BEC071008">N. Srinivasa Rao</option>
+                                            <option value="BEC071009">K. Sai Prasanth</option>
+                                            <option value="BEC071010">P. Ratna Prakash</option>
+                                            <option value="BEC071011">P. Ravi Kumar</option>
+                                            <option value="BEC071012">K. Suresh Kumar</option>
+                                            <option value="BEC071013">S. Ratna Babu</option>
+                                            <option value="BEC071017">Mastanaiah Naidu Yasam</option>
+                                            <option value="BEC071018">P. Sreedhar</option>
+                                            <option value="BEC071019">BBK. Prasad</option>
+                                            <option value="BEC071020">Surekha Peravali</option>
                                         </select>
-                                        <button 
-                                            type="button" 
+                                        <button
+                                            type="button"
                                             className='send-btn'
                                             onClick={() => handleSendClick({
-                                                day: day,
+                                                date: day,
+                                                day:period.day,
                                                 period: period.period,
                                                 class: period.class,
                                                 sub: period.sub,
-                                                // Add other data fields here
-                                            })}
+                                                assign: period.option,
+                                                status:'Pending'
+                                            }, `${dayIndex}-${periodIndex}`)}
+                                            disabled={sentData[`${dayIndex}-${periodIndex}`]} // Disable button if already sent
                                         >
-                                            Send
+                                            {sentData[`${dayIndex}-${periodIndex}`] ? 'Sent' : 'Send'}
                                         </button>
                                     </div>
                                 ))}

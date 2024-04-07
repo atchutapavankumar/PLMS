@@ -16,6 +16,9 @@ import HODMain from "./components/HODMain";
 import Profile from  "./components/Profile";
 import Register from "./components/Register";
 import WorkLoadView from "./components/WorkLoadView";
+import HODProfile from "./components/HODProfile";
+import WorkloadHistroy from "./components/WorkloadHistory";
+import HODHistory from "./components/HODHistory";
 
 const App = () => (
   <BrowserRouter>
@@ -36,10 +39,14 @@ const App = () => (
       <Route path="/hod-main" element={<HODMain/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/faculty-profile" element={<Profile/>}/>
-      <Route path="/hod-profile" element={<Profile/>}/>
+      <Route path="/hod-profile" element={<HODProfile/>}/>
+      <Route path="/hod-history" element={<HODHistory/>}/>
+
 
 
       <Route path="/work-load" element={<WorkLoadView/>}/>
+      <Route path="/workload-history" element={<WorkloadHistroy/>}/>
+
 
     </Routes>
   </BrowserRouter>

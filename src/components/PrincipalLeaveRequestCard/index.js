@@ -5,14 +5,14 @@ const PrincipalLeaveRequestsCard = (props) => {
     const {data} = props;
 
     const approveLeave = async () => {
-        const {userId}  = data
-        const response = await fetch('http://localhost:3030/api/update-leave-status/', {
+        const {_id}  = data
+        const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId: userId,
+                userId: _id,
                 leaveStatus: 'Approved',
             }),
         });
@@ -23,6 +23,30 @@ const PrincipalLeaveRequestsCard = (props) => {
        
     }
 
+    const denyLeave = async () => {
+        const { _id } = data;
+        console.log(_id);
+        try {
+            const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    leaveStatus: 'Denied',
+                }),
+            });
+
+            if (response.ok) {
+                alert("Leave Denied Successfully");
+            } else {
+                throw new Error('Failed to deny leave');
+            }
+        } catch (error) {
+            console.error('Error denying leave:', error.message);
+            // Handle error
+        }
+    };
     return (
         <div className='data-res-card'>
             <div className='card-left-container'>
@@ -53,7 +77,7 @@ const PrincipalLeaveRequestsCard = (props) => {
 
             <div className='btn-container'>
                 <button className='accept-btn' onClick={approveLeave}>Approve</button>
-                <button className='reject-btn'>Deny</button>
+                <button className='reject-btn' onClick={denyLeave}>Deny</button>
 
             </div>
                

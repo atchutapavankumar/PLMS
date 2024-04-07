@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import WorkLoadView from '../WorkLoadView';
 
-
 const ApplyLeaveForm = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
@@ -12,10 +11,9 @@ const ApplyLeaveForm = () => {
     const [endDate, setExpiryDate] = useState("");
     const [userId, setUserId] = useState("BEC071008");
     const [reason, setReason] = useState();
-    const  [showWorkLoad, setWorkLoad] = useState(true)
+    const [showWorkLoad, setWorkLoad] = useState(true);
     const [workLoadData, setWorkLoadData] = useState({});
-
-
+    const [applyButtonText, setApplyButtonText] = useState("Adjust Workload & Apply");
 
     const fetchWorkLoad = async () => {
         try {
@@ -30,14 +28,15 @@ const ApplyLeaveForm = () => {
                     userId
                 }),
             });
-    
+
             const data = await res.json();
             localStorage.setItem("userId", data.userId);
-    
+
             if (res.ok) {
                 console.log('Workload fetched successfully', data);
                 setWorkLoad(!showWorkLoad);
                 setWorkLoadData(data);
+                setApplyButtonText("Apply");
                 alert("Workload fetched successfully");
             } else {
                 console.error('Leave fetching failed:');
@@ -46,47 +45,75 @@ const ApplyLeaveForm = () => {
             console.error('Error fetching workload:', error.message);
         }
     };
-    
 
-    
-    
-
-    const handleSubmit = async (event) => {
+    const handleSubmitWOA = async (event) => {
         event.preventDefault();
-      
-        try {
-          const response = await fetch('http://localhost:3030/api/apply-leave', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userName,
-                leaveType,
-                startDate,
-                endDate,
-                reason,
-                userId
-            }),
-          }
 
-          );
-      
-          const data = await response.json();
-          localStorage.setItem("userId", data.userId);
-      
-          if (response.ok) {
-            console.log('Leave Applied successfully', data);
-            setWorkLoad(!showWorkLoad)
-            alert("Leave Applied successfully")
-            fetchWorkLoad();
-          } else {
-            console.error('Leave Apply failed:');
-          }
+        try {
+            const response = await fetch('http://localhost:3030/api/apply-leave', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userName,
+                    leaveType,
+                    startDate,
+                    endDate,
+                    reason,
+                    userId
+                }),
+            });
+
+            const data = await response.json();
+            localStorage.setItem("userId", data.userId);
+
+            if (response.ok) {
+                console.log('Leave Applied successfully', data);
+                setWorkLoad(!showWorkLoad);
+                alert("Leave Applied successfully")
+            } else {
+                console.error('Leave Apply failed:');
+            }
         } catch (error) {
-          console.error('Error Applying leave user:', error.message);
+            console.error('Error Applying leave user:', error.message);
         }
-      };
+    };
+
+    const handleSubmitWA = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:3030/api/apply-leave', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userName,
+                    leaveType,
+                    startDate,
+                    endDate,
+                    reason,
+                    userId
+                }),
+            });
+
+            const data = await response.json();
+            localStorage.setItem("userId", data.userId);
+
+            if (response.ok) {
+                console.log('Leave Applied successfully', data);
+                setWorkLoad(!showWorkLoad);
+                fetchWorkLoad()
+                alert("Leave Applied successfully")
+            } else {
+                console.error('Leave Apply failed:');
+            }
+        } catch (error) {
+            console.error('Error Applying leave user:', error.message);
+        }
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -100,8 +127,6 @@ const ApplyLeaveForm = () => {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
     };
-
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -130,21 +155,20 @@ const ApplyLeaveForm = () => {
     };
 
     const handleNameChange = (event) => {
-        setUserName(event.target.value)
-    }
+        setUserName(event.target.value);
+    };
 
-    const handleReason= (event) => {
-        setReason(event.target.value)
-    }
+    const handleReason = (event) => {
+        setReason(event.target.value);
+    };
 
     const handleLeaveType = (event) => {
-        setLeaveType(event.target.value)
-    }
+        setLeaveType(event.target.value);
+    };
 
     const handleUserId = (event) => {
-        setUserId(event.target.value)
-    }
-
+        setUserId(event.target.value);
+    };
 
 
     return (
@@ -167,23 +191,24 @@ const ApplyLeaveForm = () => {
                                         onChange ={handleNameChange}
                                         className="task-input-field"
                                     >
-                                       <option value="N. Sivaram Prasad">N. Sivaram Prasad</option>
-                                                            <option value="K. Srinivasa Rao">K. Srinivasa Rao</option>
-                                                            <option value="P. A. V Krishna Rao">P. A. V Krishna Rao</option>
-                                                            <option value="G. Prasad">G. Prasad</option>
-                                                            <option value="K. Bhaskara Rao">K. Bhaskara Rao</option>
-                                                            <option value="B. Krishnaiah">B. Krishnaiah</option>
-                                                            <option value="M. Praveen Kumar">M. Praveen Kumar</option>
-                                                            <option value="N. Srinivasa Rao">N. Srinivasa Rao</option>
-                                                            <option value="K. Sai Prasanth">K. Sai Prasanth</option>
-                                                            <option value="P. Ratna Prakash">P. Ratna Prakash</option>
-                                                            <option value="P. Ravi Kumar">P. Ravi Kumar</option>
-                                                            <option value="K. Suresh Kumar">K. Suresh Kumar</option>
-                                                            <option value="S. Ratna Babu">S. Ratna Babu</option>
-                                                            <option value="Mastanaiah Naidu Yasam">Mastanaiah Naidu Yasam</option>
-                                                            <option value="P. Sreedhar">P. Sreedhar</option>
-                                                            <option value="BBK. Prasad">BBK. Prasad</option>
-                                                            <option value="Surekha Peravali">Surekha Peravali</option>
+                                            <option value="N. Sivaram Prasad" >N. Sivaram Prasad</option>
+                                            <option value="K. Srinivasa Rao" >K. Srinivasa Rao</option>
+                                            <option value="P. A. V Krishna Rao" >P. A. V Krishna Rao</option>
+                                            <option value="G. Prasad" >G. Prasad</option>
+                                            <option value="K. Bhaskara Rao" >K. Bhaskara Rao</option>
+                                            <option value="B. Krishnaiah" >B. Krishnaiah</option>
+                                            <option value="M. Praveen Kumar" >M. Praveen Kumar</option>
+                                            <option value="N. Srinivasa Rao" >N. Srinivasa Rao</option>
+                                            <option value="K. Sai Prasanth" >K. Sai Prasanth</option>
+                                            <option value="P. Ratna Prakash" >P. Ratna Prakash</option>
+                                            <option value="P. Ravi Kumar" >P. Ravi Kumar</option>
+                                            <option value="K. Suresh Kumar">K. Suresh Kumar</option>
+                                            <option value="S. Ratna Babu" >S. Ratna Babu</option>
+                                            <option value="Mastanaiah Naidu Yasam" >Mastanaiah Naidu Yasam</option>
+                                            <option value="P. Sreedhar" >P. Sreedhar</option>
+                                            <option value="BBK. Prasad" >BBK. Prasad</option>
+                                            <option value="Surekha Peravali" >Surekha Peravali</option>
+                                            <option value="BEC071001">N. Sivaram Prasad</option>
                                     </select>
                                     <label htmlFor="name">User Id</label>
                                     <select
@@ -268,11 +293,11 @@ const ApplyLeaveForm = () => {
                                     </div>
                                 </div>
                                 <div className="btn-container-pop">
-                                    <button type="submit" className="create-btn" onClick={handleSubmit}>
-                                        Apply Self
+                                      <button type="submit" className="create-btn" onClick={handleSubmitWA}>
+                                        Apply With Adjustment
                                     </button>
-                                    <button type="submit" className="create-btn" onClick={handleSubmit}>
-                                        Apply For Others
+                                    <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
+                                        Apply Without Adjustment
                                     </button>
                                 </div>
                             </form>

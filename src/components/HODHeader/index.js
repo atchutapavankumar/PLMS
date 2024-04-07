@@ -6,6 +6,9 @@ const Hodheader= () => (
     <LinkItem to="/hod-apply-leave-form"><NavItem>Apply Leave</NavItem></LinkItem>
     <LinkItem to="/hod"><NavItem>Requests</NavItem></LinkItem>
     <LinkItem to="/hod-history-search"><NavItem>History Search</NavItem></LinkItem>
+    <LinkItem to="/hod-history"><NavItem>Personal History</NavItem></LinkItem>
+    <LinkItem to="/workload-history"><NavItem>Workload History</NavItem></LinkItem>
+
     <LinkItem to="/hod-profile"><NavItem>Profile</NavItem></LinkItem>
     <LinkItem to="/"><NavItem>Logout</NavItem></LinkItem>
 

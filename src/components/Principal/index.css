@@ -222,3 +222,10 @@
     color:white
 
 }
+
+.principal-card-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:400px;
+}

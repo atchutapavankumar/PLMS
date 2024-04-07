@@ -285,21 +285,3 @@
 .table-header p{
     width:100px;
 }
-
-.profile-container {
-    width: 500px; /* Adjust width as needed */
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .profile-image {
-    border-radius: 50%;
-  }
-  
-  .profile-info {
-    margin-top: 20px;
-  }
-  

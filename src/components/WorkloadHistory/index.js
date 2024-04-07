@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import ApplyHeader from '../ApplyHeader';
 import Hodheader from '../HODHeader';
-import LeaveRequestsCard from '../LeaveRequestsCard';
+import WorkloadHistroyCard from '../WorkLoadHistoryCard';
 import ExtraClassRequestCard from '../ExtraClassRequestCard';
 import Header from '../Header';
 
-const FacultyRequests = () => {
+
+const WorkloadHistroy = () => {
     const [dateTime, setDateTime] = useState(new Date());
-    const [extraClassRequests, setExtraClassRequests] = useState([]);
+    const [workloadData, setWorkLoadData] = useState([]);
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
         const { userId } = userData;
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3030/api/workload/search`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ userId }) // Assuming userId needs to be sent in the request body
-                });
+                const response = await fetch(`http://localhost:3030/api/workload/requests`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                setExtraClassRequests(data);
+                setWorkLoadData(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -46,7 +41,7 @@ const FacultyRequests = () => {
     return (
         <div className="hod-main-container">
             <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
-            <Header/>
+            <Hodheader/>
             <div className="nav-container">
                 <div className='top-container'>
                     <div >
@@ -61,15 +56,10 @@ const FacultyRequests = () => {
                         <p className='description'> {formatDate(dateTime)} &  {formatTime(dateTime)}</p>   
                     </div>
                 </div>
-                <div className='count-containers'>
-                    <div className='count-container-1'>
-                        <p className='card-description'>New Requests</p>
-                        <p className='count-txt'>5</p>
-                    </div>
-                </div>
+               
             </div>
-            <h2 className="nav-bar-title-2 sub-t">Extra
-                    <span> Classes Requests</span></h2>
+            <h2 className="nav-bar-title-2 sub-t">Work Load
+                    <span> History</span></h2>
             <div className='blue-line-container-2'>
                 <li className='blue-dot'></li>
                 <li className='blue-dot'></li>
@@ -77,16 +67,20 @@ const FacultyRequests = () => {
                 <div className='blue-line'></div>
             </div>
             <div className='data-container'>
-                {extraClassRequests.map(eachRequest => {
-                     const {_id} = eachRequest 
-                     return (
-                
-                    <ExtraClassRequestCard key={_id} data={eachRequest}/>)
-                }
-                )}
+                <div className='table-header'>
+                    <p>Name</p>
+                    <p>Class</p>
+                    <p>Date</p>
+                    <p>Period</p>
+                    <p>Assigned To</p>
+                    <p>Status</p>
+                </div>
+                {workloadData.map(eachData => (
+                    <WorkloadHistroyCard key={eachData.id} data={eachData}/>
+                ))}
             </div>
         </div>
     );
 }
 
-export default FacultyRequests;
+export default WorkloadHistroy;

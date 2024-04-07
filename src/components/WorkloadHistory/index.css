@@ -1,7 +1,5 @@
 .hod-main-container{
-    min-height: 100vh;
-    margin-bottom:40px;
-
+    height: 100vh;
 }
 
 .clg-logo{
@@ -106,32 +104,13 @@
 }
 
 
-.count-txt-5{
-    font-size:35px;
-    line-height: 24px;
-    font-family:"Montserrat", Sans-serif ;
-    margin-top:0px;
-    font-weight: 600;
-    color:blue;
-}
-
-.count-txt-6{
-    font-size:35px;
-    line-height: 24px;
-    font-family:"Montserrat", Sans-serif ;
-    margin-top:0px;
-    font-weight: 600;
-    color:#9d2da2;
-}
-
-
 .count-containers{
     display: flex;
     height:100px;
-    width:90% !important;
+    width:70%;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    margin:20px;
 }
 .count-container-1{
     height:90px;
@@ -159,7 +138,6 @@
     border-left-style:solid;
     border-color:red;
     border-width:5px;
-
     padding: 7px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -171,30 +149,8 @@
     border-color:yellowgreen;
     border-width:5px;
     padding: 7px;
-
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-
-.count-container-5{
-    height:90px;
-    width:140px;
-    border-left-style:solid;
-    border-color:blue;
-    border-width:5px;
-    padding: 7px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.count-container-6{
-    height:90px;
-    width:180px;
-    border-left-style:solid;
-    border-color:#9d2da2;
-    border-width:5px;
-    padding: 7px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
 
 .sub-t{
     margin:20px;
@@ -266,40 +222,3 @@
     color:white
 
 }
-
-
-.profile-image{
-    height:60px;
-    width:60px;
-}
-.table-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width:100%;
-    border-width:1px;
-    border-radius:5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-
-.table-header p{
-    width:100px;
-}
-
-.profile-container {
-    width: 500px; /* Adjust width as needed */
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .profile-image {
-    border-radius: 50%;
-  }
-  
-  .profile-info {
-    margin-top: 20px;
-  }
-  
