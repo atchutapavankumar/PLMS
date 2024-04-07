@@ -143,6 +143,10 @@ import { LinkItem } from '../Header/StyledComponents';
 const Principal = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [reqData, setReqData] = useState([])
+    const removeLocalstorageData = () => {
+        localStorage.removeItem("user")
+        localStorage.removeItem("userId")
+    }
 
     useEffect(() => {
         fetchReqData();
@@ -195,9 +199,9 @@ return(
                 <br/>
                 <div className='principal-card-nav'>
                 <p className='designtion'>Pricipal</p>
-                <LinkItem to="/hod-apply-leave-form"><p>Apply Leave</p></LinkItem>
+                <LinkItem to="/hod-history-search"><p>History</p></LinkItem>
 
-                <p className='designtion'>Logout</p>
+                <LinkItem to="/"><p onClick={removeLocalstorageData}>Logout</p></LinkItem>
                 </div>
 
                 

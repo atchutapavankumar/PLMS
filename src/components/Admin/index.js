@@ -327,14 +327,7 @@ const AdminPage = () => {
                             <li className='blue-dot'></li>
                             <div className='blue-line'></div>
                         </div>
-                        <div className="select-form">
-                            <select className = "select-item" value={selectedYear} onChange={handleYearChange}>
-                                {Array.from({ length: 11 }, (_, i) => 2014 + i).map(year => (
-                                    <option key={year} value={year}>{year}</option>
-                                ))}
-                            </select>
-                            <button onClick={handleSearch} className='search-btn'>Search</button>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -352,7 +345,6 @@ const AdminPage = () => {
                     <p>Name</p>
                     <p>Casual Leave</p>
                     <p>Earn Leave</p>
-                    <p>One Hour</p>
                     <p>Medical Leave</p>
                     <p>Maternity Leave</p>
                     <p>Special Casual Leave</p>

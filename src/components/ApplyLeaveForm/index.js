@@ -82,7 +82,7 @@ const ApplyLeaveForm = () => {
 
     const handleSubmitWA = async (event) => {
         event.preventDefault();
-
+    
         try {
             const response = await fetch('http://localhost:3030/api/apply-leave', {
                 method: 'POST',
@@ -98,15 +98,23 @@ const ApplyLeaveForm = () => {
                     userId
                 }),
             });
-
+    
             const data = await response.json();
             localStorage.setItem("userId", data.userId);
-
+    
             if (response.ok) {
                 console.log('Leave Applied successfully', data);
                 setWorkLoad(!showWorkLoad);
-                fetchWorkLoad()
-                alert("Leave Applied successfully")
+                fetchWorkLoad();
+    
+                // Save selected ID and name to local storage as leaveData
+                const leaveData = {
+                    userId,
+                    userName
+                };
+                localStorage.setItem("leaveData", JSON.stringify(leaveData));
+    
+                alert("Leave Applied successfully");
             } else {
                 console.error('Leave Apply failed:');
             }
@@ -114,6 +122,7 @@ const ApplyLeaveForm = () => {
             console.error('Error Applying leave user:', error.message);
         }
     };
+    
 
     useEffect(() => {
         const interval = setInterval(() => {

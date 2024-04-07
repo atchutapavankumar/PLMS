@@ -7,8 +7,10 @@ const WorkLoadView = ({ workLoadData }) => {
 
     useEffect(() => {
         // Fetch user data from local storage when component mounts
-        const user = JSON.parse(localStorage.getItem('user'));
-        setUserData(user);
+        const leaveData = JSON.parse(localStorage.getItem('leaveData'));
+        if (leaveData) {
+            setUserData(leaveData);
+        }
     }, []);
 
     // Function to send data to the API
@@ -40,7 +42,8 @@ const WorkLoadView = ({ workLoadData }) => {
         }
     };
 
-   // Event handler for the "Send" button
+    // Event handler for the "Send" button
+    // Event handler for the "Send" button
 const handleSendClick = async (rowData, rowIndex) => {
     if (!userData) {
         console.error('User data not found in local storage');
@@ -48,7 +51,7 @@ const handleSendClick = async (rowData, rowIndex) => {
     }
 
     try {
-        // Get the selected option value
+        // Retrieve the selected option value from the dropdown
         const selectedOption = document.getElementById(`select-${rowIndex}`).value;
 
         // Add the selected option value to the rowData
@@ -57,7 +60,7 @@ const handleSendClick = async (rowData, rowIndex) => {
         const payload = {
             ...rowData,
             userId: userData.userId,
-            username: userData.username
+            username: userData.userName // Changed from username to userName
         };
 
         const isSent = await sendDataToAPI(payload, rowIndex);
@@ -70,6 +73,7 @@ const handleSendClick = async (rowData, rowIndex) => {
         console.error('Error handling send click:', error);
     }
 };
+
 
     return (
         <div className='admin-main-container'>
@@ -84,7 +88,7 @@ const handleSendClick = async (rowData, rowIndex) => {
                 <div className='work-load-form'>
                     <div className='table-container'>
                         <div className='table-header'>
-                        <p>Date</p>
+                            <p>Date</p>
                             <p>Day</p>
                             <p>Period</p>
                             <p>Class</p>
@@ -96,8 +100,8 @@ const handleSendClick = async (rowData, rowIndex) => {
                             <div key={day}>
                                 {periods.map((period, periodIndex) => (
                                     <div key={periodIndex} className='table-row'>
-                                    <p>{day}</p>
-                                    <p>{period.day}</p>
+                                        <p>{day}</p>
+                                        <p>{period.day}</p>
                                         <p>{period.period}</p>
                                         <p>{period.class}</p>
                                         <p>{period.sub}</p>
@@ -124,12 +128,12 @@ const handleSendClick = async (rowData, rowIndex) => {
                                             className='send-btn'
                                             onClick={() => handleSendClick({
                                                 date: day,
-                                                day:period.day,
+                                                day: period.day,
                                                 period: period.period,
                                                 class: period.class,
                                                 sub: period.sub,
                                                 assign: period.option,
-                                                status:'Pending'
+                                                status: 'Pending'
                                             }, `${dayIndex}-${periodIndex}`)}
                                             disabled={sentData[`${dayIndex}-${periodIndex}`]} // Disable button if already sent
                                         >

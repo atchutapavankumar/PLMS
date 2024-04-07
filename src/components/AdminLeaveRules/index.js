@@ -1,119 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import AdminLeaveRulesItems from '../AdminLeaveRulesItems';
 import './index.css';
-import Adminheader from '../AdminHeader';
+import AdminHeader from '../AdminHeader';
 
-
-// Add more objects as needed
-const sampleData = [
-    {
-        sl: 1,
-        designation: 'Head Of Department',
-        availableCasual: 4,
-        totalCasual: 10,
-        availableEarn: 2,
-        totalEarn: 10,
-        availableOneHour: 0,
-        totalOneHour: 2,
-        availableMedical: 0,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 0,
-        totalSpecialCasual: 5
-    },
-    {
-        sl: 2,
-        designation: 'Assistant Professor',
-        availableCasual: 3,
-        totalCasual: 10,
-        availableEarn: 5,
-        totalEarn: 10,
-        availableOneHour: 1,
-        totalOneHour: 2,
-        availableMedical: 8,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 2,
-        totalSpecialCasual: 5
-    },
-    {
-        sl: 3,
-        designation: 'Associate Professor',
-        availableCasual: 0,
-        totalCasual: 10,
-        availableEarn: 6,
-        totalEarn: 10,
-        availableOneHour: 0,
-        totalOneHour: 2,
-        availableMedical: 5,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 0,
-        totalSpecialCasual: 5
-    },
-    {
-        sl: 4,
-        designation: 'Professor',
-        availableCasual: 1,
-        totalCasual: 10,
-        availableEarn: 4,
-        totalEarn: 10,
-        availableOneHour: 0,
-        totalOneHour: 2,
-        availableMedical: 10,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 0,
-        totalSpecialCasual: 5
-    },
-    {
-        sl: 5,
-        designation: 'Dean Academics',
-        availableCasual: 2,
-        totalCasual: 10,
-        availableEarn: 8,
-        totalEarn: 10,
-        availableOneHour: 0,
-        totalOneHour: 2,
-        availableMedical: 0,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 3,
-        totalSpecialCasual: 5
-    },
-    {
-        sl: 6,
-        designation: 'Principal',
-        availableCasual: 0,
-        totalCasual: 10,
-        availableEarn: 15,
-        totalEarn: 15,
-        availableOneHour: 0,
-        totalOneHour: 2,
-        availableMedical: 5,
-        totalMedical: 15,
-        availableMeternity: 0,
-        totalMeternity: 90,
-        availableSpecialCasual: 0,
-        totalSpecialCasual: 5
-    },
-    
-];
-
-       
-
-
-
-
-const AdminLeaveRules= () => {
+const AdminLeaveRules = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [selectedYear, setSelectedYear] = useState(2024);
     const [showApplyForm, setShowApplyForm] = useState(false);
+    const [designations, setDesignations] = useState([]);
+
+    const [newDesignation, setNewDesignation] = useState({
+
+        designation: '',
+        leavePolicy: {
+            casualLeave: 0,
+            earnLeave: 0,
+            oneHourLeave: 0,
+            medicalLeave: 0,
+            maternityLeave: 0,
+            specialCasualLeave: 0
+        }
+    });
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -123,49 +30,75 @@ const AdminLeaveRules= () => {
         return () => clearInterval(interval);
     }, []);
 
-    const formatDate = (date) => {
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
+    useEffect(() => {
+        fetchDesignations();
+    }, []);
+
+    const fetchDesignations = async () => {
+        try {
+            const response = await fetch('http://localhost:3030/api/designations');
+            const data = await response.json();
+            setDesignations(data);
+        } catch (error) {
+            console.error('Error fetching designations:', error);
+        }
     };
 
-    const formatTime = (date) => {
-        const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-        return date.toLocaleTimeString('en-US', options);
+    const handleAddDesignation = async () => {
+        try {
+            const response = await fetch('http://localhost:3030/api/designations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newDesignation)
+            });
+            if (response.ok) {
+                fetchDesignations();
+            } else {
+                console.error('Failed to add designation:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error adding designation:', error);
+        }
     };
 
-    const handleYearChange = (e) => {
-        setSelectedYear(parseInt(e.target.value));
+    const handleLeaveUpdate = async (designationId, leaveCounts) => {
+        try {
+            const response = await fetch(`/api/designations/${designationId}/leave`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(leaveCounts)
+            });
+            if (response.ok) {
+                fetchDesignations();
+            } else {
+                console.error('Failed to update leave counts:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating leave counts:', error);
+        }
     };
 
-    const handleSearch = () => {
-        console.log("Search data for year:", selectedYear);
-    };
-
-    const renderForm = () => {
-        setShowApplyForm(true);
-    };
-
-    const closeForm = () => {
-        setShowApplyForm(false);
+    const handleInputChange = (e) => {
+        setNewDesignation({ ...newDesignation, [e.target.name]: e.target.value });
     };
 
     return (
         <div className="admin-main-container">
-                <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
-
-            <Adminheader />
+            <AdminHeader />
             <div className="nav-container">
                 <div className='top-container'>
                     <div>
-                    <h2 className="nav-bar-title">Leave
-                    <span> Rules</span></h2>
+                        <h2 className="nav-bar-title">Leave Rules</h2>
                         <div className='blue-line-container'>
                             <li className='blue-dot'></li>
                             <li className='blue-dot'></li>
                             <li className='blue-dot'></li>
                             <div className='blue-line'></div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -176,16 +109,19 @@ const AdminLeaveRules= () => {
                     <p>Designation</p>
                     <p>Casual Leave</p>
                     <p>Earn Leave</p>
-                    <p>One Hour</p>
                     <p>Medical Leave</p>
                     <p>Maternity Leave</p>
                     <p>Special Casual Leave</p>
                     <p>Update</p>
-
                 </div>
-                {sampleData.map(eachData => (
-                    <AdminLeaveRulesItems key={eachData.id} data={eachData} />
+                {designations.map(eachData => (
+                    <AdminLeaveRulesItems key={eachData._id} data={eachData} onUpdateLeave={handleLeaveUpdate} />
                 ))}
+                <div className="add-designation-form">
+                    <h2>Add New Designation</h2>
+                    <input type="text" name="designation" placeholder="Designation" value={newDesignation.designation} onChange={handleInputChange} />
+                    <button onClick={handleAddDesignation}>Add Designation</button>
+                </div>
             </div>
         </div>
     );
