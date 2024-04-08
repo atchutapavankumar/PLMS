@@ -257,7 +257,6 @@ const ApplyLeaveForm = () => {
                                     >
                                          <option value="Casual Leave">Casual Leave</option>
                                             <option value="Earn Leave">Earn Leave</option>
-                                            <option value="One Hour">One Hour</option>
                                             <option value="Medical Leave">Medical Leave</option>
                                             <option value="Meternity Leave">Meternity Leave</option>
                                             <option value="Special Casual Leave">Special Casual Leave</option>
