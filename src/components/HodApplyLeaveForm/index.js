@@ -15,10 +15,39 @@ const HodApplyLeaveForm = () => {
     const [workLoadData, setWorkLoadData] = useState({});
     const [applyButtonText, setApplyButtonText] = useState("Adjust Workload & Apply");
 
-  
-    const handleSubmitWOA = async (event) => {
-        event.preventDefault();
+    const fetchWorkLoad = async () => {
+        try {
+            const res = await fetch('http://localhost:3030/api/workload/schedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    startDate,
+                    endDate,
+                    userId
+                }),
+            });
 
+            const data = await res.json();
+            localStorage.setItem("userId", data.userId);
+
+            if (res.ok) {
+                console.log('Workload fetched successfully', data);
+                setWorkLoad(!showWorkLoad);
+                setWorkLoadData(data);
+                setApplyButtonText("Apply");
+                alert("Workload fetched successfully");
+            } else {
+                console.error('Leave fetching failed:');
+            }
+        } catch (error) {
+            console.error('Error fetching workload:', error.message);
+        }
+    };
+    const handleSubmitWA = async (event) => {
+        event.preventDefault();
+    
         try {
             const response = await fetch('http://localhost:3030/api/apply-leave', {
                 method: 'POST',
@@ -34,14 +63,23 @@ const HodApplyLeaveForm = () => {
                     userId
                 }),
             });
-
+    
             const data = await response.json();
             localStorage.setItem("userId", data.userId);
-
+    
             if (response.ok) {
                 console.log('Leave Applied successfully', data);
                 setWorkLoad(!showWorkLoad);
-                alert("Leave Applied successfully")
+                fetchWorkLoad();
+    
+                // Save selected ID and name to local storage as leaveData
+                const leaveData = {
+                    userId,
+                    userName
+                };
+                localStorage.setItem("leaveData", JSON.stringify(leaveData));
+    
+                alert("Leave Applied successfully");
             } else {
                 console.error('Leave Apply failed:');
             }
@@ -49,6 +87,7 @@ const HodApplyLeaveForm = () => {
             console.error('Error Applying leave user:', error.message);
         }
     };
+    
 
   
     useEffect(() => {
@@ -228,7 +267,7 @@ const HodApplyLeaveForm = () => {
                                     </div>
                                 </div>
                                 <div className="btn-container-pop">
-                                      <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
+                                      <button type="submit" className="create-btn" onClick={handleSubmitWA}>
                                         Apply
                                     </button>
                                    
