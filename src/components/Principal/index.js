@@ -174,6 +174,8 @@ const Principal = () => {
 
     const userdata = JSON.parse(localStorage.getItem('user'))
     const {username, userId} = userdata
+    let len = reqData.length
+
 return(
     <div className="hod-main-container">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
@@ -214,25 +216,14 @@ return(
             <div className='count-containers'>
                 <div className='count-container-1'>
                 <p className='card-description'>Total Requests</p>
-                <p className='count-txt'>53</p>
+                <p className='count-txt'>{len}</p>
                 </div>
 
-                <div className='count-container-2'>
-                <p className='card-description'>New Requests</p>
-                <p className='count-txt-2'>40</p>
-                </div>
+             
 
-                <div className='count-container-3'>
-                <p className='card-description'>Rejected</p>
-                <p className='count-txt-3'>3</p>
-                </div>
+               
 
-                <div className='count-container-4'>
-                <p className='card-description'>
-                Pending Requests</p>
-                <p className='count-txt-4'>15</p>
-                </div>
-            </div>
+                
 
             </div>
             <h2 className="nav-bar-title-2 sub-t">Leave
@@ -249,6 +240,7 @@ return(
                     <PrincipalLeaveRequestsCard key={eachData.id} data={eachData}/>
                 ))}
             </div>
+    </div>
     </div>)
 
 }

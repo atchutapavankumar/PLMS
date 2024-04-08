@@ -122,6 +122,15 @@ const Register = () => {
         console.log('User registered successfully');
         localStorage.setItem("user", JSON.stringify(data))
         localStorage.setItem("userId", userId)
+        if (data.position === 'Faculty'){
+          navigate("/faculty-main");
+        }else if (data.position === 'HOD'){
+          navigate("hod-main");
+        }else if (data.position === 'Principal'){
+          navigate("/principal");
+        }else if (data.position === 'Admin'){
+          navigate("/admin")
+        }
 
         navigate(`/${position.toLowerCase()}-main`);
       } else {
