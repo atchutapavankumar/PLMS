@@ -340,7 +340,6 @@ const AdminPage = () => {
             </div>
             <div className='data-container'>
                 <div className='table-header'>
-                    <p>S.No</p>
                     <p>ID</p>
                     <p>Name</p>
                     <p>Casual Leave</p>

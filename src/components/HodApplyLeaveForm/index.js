@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
+import HodHeader from '../HODHeader';
 import WorkLoadView from '../WorkLoadView';
 
 const HodApplyLeaveForm = () => {
@@ -110,7 +110,7 @@ const HodApplyLeaveForm = () => {
     return (
         <div className="hod-main-container">
             <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
-            <Header />
+            <HodHeader />
             <div className="nav-container">
                 <h2 className="nav-bar-title sub-t">Leave <span>Application</span></h2>
                 <div className='data-container'>

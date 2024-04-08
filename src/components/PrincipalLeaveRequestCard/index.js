@@ -5,23 +5,26 @@ const PrincipalLeaveRequestsCard = (props) => {
     const {data} = props;
 
     const approveLeave = async () => {
-        const {_id}  = data
+        const { _id, userId, startDate, endDate, leaveType } = data;
         const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId: _id,
+                userId,
                 leaveStatus: 'Approved',
+                startDate,
+                endDate,
+                leaveType
             }),
         });
-  
+    
         if (response.ok){
             alert("Leave Approved Successfully")
         }
-       
     }
+    
 
     const denyLeave = async () => {
         const { _id } = data;

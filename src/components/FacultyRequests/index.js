@@ -9,6 +9,7 @@ const FacultyRequests = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [extraClassRequests, setExtraClassRequests] = useState([]);
 
+
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
         const { userId } = userData;
@@ -42,6 +43,7 @@ const FacultyRequests = () => {
         const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
         return date.toLocaleTimeString('en-US', options);
     };
+    const count = extraClassRequests.length
 
     return (
         <div className="hod-main-container">
@@ -64,7 +66,7 @@ const FacultyRequests = () => {
                 <div className='count-containers'>
                     <div className='count-container-1'>
                         <p className='card-description'>New Requests</p>
-                        <p className='count-txt'>5</p>
+                        <p className='count-txt'>{count}</p>
                     </div>
                 </div>
             </div>

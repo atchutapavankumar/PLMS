@@ -1,150 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import HODHeader from '../Header';
-import Hodheader from '../HODHeader';
+import Header from '../Header';
+import './index.css'; 
 
-const HODProfile = () => {
-    const [userName, setUserName] = useState('');
-    const [gmail, setGmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [userId, setUserId] = useState('');
-    const [department, setDepartment] = useState('');
-    const [reason, setReason] = useState('');
+const Profile = () => {
+  const [userName, setUserName] = useState('');
+  const [gmail, setGmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [userId, setUserId] = useState('');
+  const [department, setDepartment] = useState('');
+  const [designation, setDesignation] = useState(''); // Add for designation
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            setUserName(user.userName || '');
-            setGmail(user.gmail || '');
-            setPhoneNumber(user.phoneNumber || '');
-            setUserId(user.userId || '');
-            setDepartment(user.department || '');
-            setReason(user.reason || '');
-        }
-    }, []);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data
+    if (user) {
+      setUserName(user.username || '');
+      setGmail(user.gmail || '');
+      setPhoneNumber(user.phoneNumber || '');
+      setUserId(user.userId || '');
+      setDepartment('IT' || 'IT');
+      setDesignation(user.position || ''); // Fetch designation
+    }
+  }, []);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        switch (name) {
-            case "userName":
-                setUserName(value);
-                break;
-            case "gmail":
-                setGmail(value);
-                break;
-            case "phoneNumber":
-                setPhoneNumber(value);
-                break;
-            case "userId":
-                setUserId(value);
-                break;
-            case "department":
-                setDepartment(value);
-                break;
-            case "reason":
-                setReason(value);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission
-    };
-
-    return (
-        <div className="hod-main-container">
-            <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
-            <Hodheader />
-            <div className="nav-container">
-                <h2 className="nav-bar-title sub-t">Profile <span></span></h2>
-                <div className='data-container'>
-                    <div className="create-task-popup-container">
-                        <h4 className="Form-Title">Update Profile</h4>
-                        <div className="create-task-form-container">
-                            <form className="create-task-form" onSubmit={handleSubmit}>
-
-                                <div className="create-task-form-input">
-                                    <label htmlFor="name">Name</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="userName"
-                                        value={userName}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <br />
-                                <div className="create-task-form-input">
-                                    <label htmlFor="gmail">Gmail</label>
-                                    <input
-                                        type="text"
-                                        id="gmail"
-                                        name="gmail"
-                                        value={gmail}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <div className="create-task-form-input">
-                                    <label htmlFor="phoneNumber">Phone Number</label>
-                                    <input
-                                        type="text"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        value={phoneNumber}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <div className="create-task-form-input">
-                                    <label htmlFor="userId">Id</label>
-                                    <input
-                                        type="text"
-                                        id="userId"
-                                        name="userId"
-                                        value={userId}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <div className="create-task-form-input">
-                                    <label htmlFor="department">Department</label>
-                                    <input
-                                        type="text"
-                                        id="department"
-                                        name="department"
-                                        value={department}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <div className="create-task-form-input">
-                                    <label htmlFor="reason">Years of Experience</label>
-                                    <input
-                                        type="text"
-                                        id="reason"
-                                        name="reason"
-                                        value={reason}
-                                        onChange={handleChange}
-                                        className="task-input-field"
-                                    />
-                                </div>
-                                <div className="btn-container-pop">
-                                    <button type="submit" className="create-btn">
-                                        Update Profile
-                                    </button>
-                                   
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div>
+      <img 
+        src='https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg'
+        className="clg-logo" 
+        alt="College Logo" 
+      />
+      <Header /> 
+      <div className="profile-container"> 
+        <div className="profile-card">
+          <img 
+            src='https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp' 
+            alt="Profile" 
+            className="profile-image" 
+          />
+          <h2>{userName}</h2>
+          <div className="profile-info">
+            <p><strong>ID:</strong> {userId}</p> 
+            <p><strong>Gmail:</strong> {gmail}</p>
+            <p><strong>Phone Number:</strong> {phoneNumber}</p>
+            <p><strong>Designation:</strong> {designation}</p> {/* Display designation */}
+            <p><strong>Department:</strong> {department}</p>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
-export default HODProfile;
+export default Profile;

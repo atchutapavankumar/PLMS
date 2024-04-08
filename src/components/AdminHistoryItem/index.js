@@ -1,25 +1,19 @@
-import './index.css'
+import './index.css';
 
 const HistoryLeave = (props) => {
-    const {data} = props
-return (
-    <div className='table-row'>
-        <p>{data.sl}</p>
-        <p>{data.id}</p>
-        <p>{data.name}</p>
-        <p>{data.availableCasual}/{data.totalCasual}</p>
-        <p >{data.availableEarn}/{data.totalEarn}</p>
-        <p >{data.availableMedical}/{data.totalMedical}</p>
-        <p >{data.availableMeternity}/{data.totalMeternity}</p>
-        <p >{data.availableSpecialCasual}/{data.totalSpecialCasual}</p>
+    const { data } = props;
+    console.log(data);
+    return (
+        <div className='table-row'>
+            <p>{data.id}</p>
+            <p>{data.name}</p>
+            <p>{data.remaining.casualLeave}/{data.total.casualLeave}</p>
+            <p>{data.remaining.earnLeave}/{data.total.earnLeave}</p>
+            <p>{data.remaining.medicalLeave}/{data.total.medicalLeave}</p>
+            <p>{data.remaining.maternityLeave}/{data.total.maternityLeave}</p>
+            <p>{data.remaining.specialCasualLeave}/{data.total.specialCasualLeave}</p>
+        </div>
+    );
+};
 
-        
-
-
-
-    </div>
-)
-}
-
-
-export default HistoryLeave
+export default HistoryLeave;

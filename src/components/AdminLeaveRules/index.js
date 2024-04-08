@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import AdminLeaveRulesItems from '../AdminLeaveRulesItems';
 import './index.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import AdminHeader from '../AdminHeader';
 
 const AdminLeaveRules = () => {
@@ -8,14 +11,11 @@ const AdminLeaveRules = () => {
     const [selectedYear, setSelectedYear] = useState(2024);
     const [showApplyForm, setShowApplyForm] = useState(false);
     const [designations, setDesignations] = useState([]);
-
     const [newDesignation, setNewDesignation] = useState({
-
         designation: '',
         leavePolicy: {
             casualLeave: 0,
             earnLeave: 0,
-            oneHourLeave: 0,
             medicalLeave: 0,
             maternityLeave: 0,
             specialCasualLeave: 0
@@ -46,7 +46,7 @@ const AdminLeaveRules = () => {
 
     const handleAddDesignation = async () => {
         try {
-            const response = await fetch('http://localhost:3030/api/designations', {
+            const response = await fetch('http://localhost:3030/api/designations/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,6 +55,7 @@ const AdminLeaveRules = () => {
             });
             if (response.ok) {
                 fetchDesignations();
+                showToast("Designation added successfully");
             } else {
                 console.error('Failed to add designation:', response.statusText);
             }
@@ -65,8 +66,8 @@ const AdminLeaveRules = () => {
 
     const handleLeaveUpdate = async (designationId, leaveCounts) => {
         try {
-            const response = await fetch(`/api/designations/${designationId}/leave`, {
-                method: 'PATCH',
+            const response = await fetch(`http://localhost:3030/api/designations/${designationId}/leave`, {
+                method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -74,12 +75,20 @@ const AdminLeaveRules = () => {
             });
             if (response.ok) {
                 fetchDesignations();
+                alert("Leave Count Updated!!")
+                showToast("Leave counts updated successfully");
             } else {
                 console.error('Failed to update leave counts:', response.statusText);
             }
         } catch (error) {
             console.error('Error updating leave counts:', error);
         }
+    };
+
+    const showToast = (message) => {
+        toast.success(message, {
+            position: toast.POSITION.TOP_RIGHT
+        });
     };
 
     const handleInputChange = (e) => {
@@ -102,10 +111,9 @@ const AdminLeaveRules = () => {
                     </div>
                 </div>
             </div>
-          
+
             <div className='data-container'>
                 <div className='table-header'>
-                    <p>S.No</p>
                     <p>Designation</p>
                     <p>Casual Leave</p>
                     <p>Earn Leave</p>
@@ -114,14 +122,12 @@ const AdminLeaveRules = () => {
                     <p>Special Casual Leave</p>
                     <p>Update</p>
                 </div>
+                <ToastContainer />
+
                 {designations.map(eachData => (
                     <AdminLeaveRulesItems key={eachData._id} data={eachData} onUpdateLeave={handleLeaveUpdate} />
                 ))}
-                <div className="add-designation-form">
-                    <h2>Add New Designation</h2>
-                    <input type="text" name="designation" placeholder="Designation" value={newDesignation.designation} onChange={handleInputChange} />
-                    <button onClick={handleAddDesignation}>Add Designation</button>
-                </div>
+              
             </div>
         </div>
     );

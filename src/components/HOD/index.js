@@ -170,6 +170,8 @@ const HOD = () => {
       return date.toLocaleTimeString('en-US', options);
     };
 
+    let count = requestsData.length
+
 return(
     <div className="hod-main-container">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo"/>
@@ -193,7 +195,7 @@ return(
             <div className='count-containers'>
                 <div className='count-container-1'>
                 <p className='card-description'>New Requests</p>
-                <p className='count-txt'>53</p>
+                <p className='count-txt'>{count}</p>
                 </div>
 
                 

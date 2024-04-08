@@ -19,6 +19,7 @@ import WorkLoadView from "./components/WorkLoadView";
 import HODProfile from "./components/HODProfile";
 import WorkloadHistroy from "./components/WorkloadHistory";
 import HODHistory from "./components/HODHistory";
+import Temp from "./components/TempProfile";
 
 const App = () => (
   <BrowserRouter>
@@ -46,6 +47,10 @@ const App = () => (
 
       <Route path="/work-load" element={<WorkLoadView/>}/>
       <Route path="/workload-history" element={<WorkloadHistroy/>}/>
+      <Route path="/temp" element={<Temp/>}/>
+
+
+      
 
 
     </Routes>

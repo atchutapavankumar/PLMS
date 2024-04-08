@@ -31,7 +31,7 @@
 
 .edit-btn{
     padding:5px;
-    background-color: purple;
+    background-color: purple !important;
     border-radius: 5px;
     text-align: center;
     color:white;
