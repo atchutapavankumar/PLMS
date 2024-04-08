@@ -125,14 +125,13 @@ const Register = () => {
         if (data.position === 'Faculty'){
           navigate("/faculty-main");
         }else if (data.position === 'HOD'){
-          navigate("hod-main");
+          navigate("/hod");
         }else if (data.position === 'Principal'){
           navigate("/principal");
         }else if (data.position === 'Admin'){
           navigate("/admin")
         }
 
-        navigate(`/${position.toLowerCase()}-main`);
       } else {
         console.error('Registration failed:', data.message);
         setShowSubmitError(true);
@@ -244,9 +243,11 @@ const Register = () => {
           <div className="input-container">{renderUserId()}</div>
           <div className="input-container">{renderPasswordField()}</div>
           <div className="input-container">{renderSelectedField()}</div>
+          <Link>
           <button type="submit" className="login-button" onClick={submitForm}>
             Register
           </button>
+          </Link>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
           or
           <Link to="/" className="link-item">

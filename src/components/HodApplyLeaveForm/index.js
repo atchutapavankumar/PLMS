@@ -59,6 +59,51 @@ const HodApplyLeaveForm = () => {
                     leaveType,
                     startDate,
                     endDate,
+                    leaveStatus:"HOD-Approved",
+                    reason,
+                    userId
+                }),
+            });
+    
+            const data = await response.json();
+            localStorage.setItem("userId", data.userId);
+    
+            if (response.ok) {
+                console.log('Leave Applied successfully', data);
+                setWorkLoad(!showWorkLoad);
+                fetchWorkLoad();
+    
+                // Save selected ID and name to local storage as leaveData
+                const leaveData = {
+                    userId,
+                    userName
+                };
+                localStorage.setItem("leaveData", JSON.stringify(leaveData));
+    
+                alert("Leave Applied successfully");
+            } else {
+                console.error('Leave Apply failed:');
+            }
+        } catch (error) {
+            console.error('Error Applying leave user:', error.message);
+        }
+    };
+
+    const handleSubmitWOA = async (event) => {
+        event.preventDefault();
+    
+        try {
+            const response = await fetch('http://localhost:3030/api/apply-leave', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userName,
+                    leaveType,
+                    startDate,
+                    endDate,
+                    leaveStatus:"HOD-Approved",
                     reason,
                     userId
                 }),
@@ -269,6 +314,9 @@ const HodApplyLeaveForm = () => {
                                 <div className="btn-container-pop">
                                       <button type="submit" className="create-btn" onClick={handleSubmitWA}>
                                         Apply
+                                    </button>
+                                    <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
+                                        Apply Without Adjustment
                                     </button>
                                    
                                 </div>

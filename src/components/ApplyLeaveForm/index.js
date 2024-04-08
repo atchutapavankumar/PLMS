@@ -60,6 +60,7 @@ const ApplyLeaveForm = () => {
                     leaveType,
                     startDate,
                     endDate,
+                    leaveStatus:"Pending",
                     reason,
                     userId
                 }),
