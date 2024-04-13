@@ -3,6 +3,7 @@ import './index.css';
 import HistoryLeave from '../HistoryLeave';
 import Header from '../Header';
 import Hodheader from '../HODHeader';
+import HODHistoryLeave from '../HODHistoryLeave';
 
 const HODHistory = () => {
     const [dateTime, setDateTime] = useState(new Date());
@@ -102,7 +103,7 @@ const HODHistory = () => {
                     <p>Cancel</p>
                 </div>
                 {historyData.map(eachData => (
-                    <HistoryLeave key={eachData.id} data={eachData}/>
+                    <HODHistoryLeave key={eachData.id} data={eachData}/>
                 ))}
             </div>
         </div>

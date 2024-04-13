@@ -52,6 +52,8 @@ const AdminPage = () => {
     return (
         <div>
         <div className="admin-page">
+        <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
+
             <AdminHeader dateTime={dateTime} />
             <div className="admin-content">
                 <div className="admin-history">

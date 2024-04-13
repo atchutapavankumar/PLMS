@@ -11,6 +11,8 @@ const ApplyLeaveForm = () => {
     const [endDate, setExpiryDate] = useState("");
     const [userId, setUserId] = useState("BEC071008");
     const [reason, setReason] = useState();
+    const [leaveStatus, setleaveStatus] = useState("Pending");
+
     const [showWorkLoad, setWorkLoad] = useState(true);
     const [workLoadData, setWorkLoadData] = useState({});
     const [applyButtonText, setApplyButtonText] = useState("Adjust Workload & Apply");
@@ -60,7 +62,7 @@ const ApplyLeaveForm = () => {
                     leaveType,
                     startDate,
                     endDate,
-                    leaveStatus:"Pending",
+                    leaveStatus,
                     reason,
                     userId
                 }),
@@ -94,6 +96,7 @@ const ApplyLeaveForm = () => {
                     userName,
                     leaveType,
                     startDate,
+                    leaveStatus,
                     endDate,
                     reason,
                     userId

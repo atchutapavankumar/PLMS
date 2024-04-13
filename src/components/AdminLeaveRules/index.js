@@ -97,6 +97,8 @@ const AdminLeaveRules = () => {
 
     return (
         <div className="admin-main-container">
+                    <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" className="clg-logo" alt="logo" />
+
             <AdminHeader />
             <div className="nav-container">
                 <div className='top-container'>
