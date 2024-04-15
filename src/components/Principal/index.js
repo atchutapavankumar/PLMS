@@ -159,7 +159,7 @@ const Principal = () => {
     }, []);
   
     const fetchReqData = async () => {
-        const res = await fetch("http://localhost:3030/get/hodapproved/leaves")
+        const res = await fetch("https://leave-ms-server.onrender.com/get/hodapproved/leaves")
         const data = await res.json();
         setReqData(data)
 } 
