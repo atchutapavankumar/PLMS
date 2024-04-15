@@ -156,7 +156,7 @@ const HOD = () => {
     }, []);
   
     const fetchRequestsData = async () => {
-        const res = await fetch("http://localhost:3030/get/pending/leaves")
+        const res = await fetch("https://leave-ms-server.onrender.com/get/pending/leaves")
         const data = await res.json();
         setRequestsData(data)
 } 
