@@ -15,7 +15,7 @@ const HODHistoryLeave = (props) => {
 
     const handleCancel = async () => {
         try {
-            const response = await fetch(`http://localhost:3030/leave/${data._id}/cancel`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/leave/${data._id}/cancel`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
