@@ -19,7 +19,7 @@ const ApplyLeaveForm = () => {
 
     const fetchWorkLoad = async () => {
         try {
-            const res = await fetch('http://localhost:3030/api/workload/schedule', {
+            const res = await fetch('https://leave-ms-server.onrender.com/api/workload/schedule', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const ApplyLeaveForm = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3030/api/apply-leave', {
+            const response = await fetch('https://leave-ms-server.onrender.com/api/apply-leave', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const ApplyLeaveForm = () => {
         event.preventDefault();
     
         try {
-            const response = await fetch('http://localhost:3030/api/apply-leave', {
+            const response = await fetch('https://leave-ms-server.onrender.com/api/apply-leave', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
