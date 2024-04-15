@@ -9,7 +9,7 @@ const ExtraClassRequestCard = (props) => {
 
     const acceptRequest = async () => {
         const {_id}  = data
-        const response = await fetch(`http://localhost:3030/api/update-request-status/${_id}`, {
+        const response = await fetch(`https://leave-ms-server.onrender.com/api/update-request-status/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const ExtraClassRequestCard = (props) => {
         const { _id } = data;
         console.log(_id);
         try {
-            const response = await fetch(`http://localhost:3030/api/update-request-status/${_id}`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/api/update-request-status/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
