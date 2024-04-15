@@ -18,7 +18,7 @@ const WorkLoadView = ({ workLoadData }) => {
         try {
             // Perform fetch POST request to your API endpoint
             console.log(rowData)
-            const response = await fetch('http://localhost:3030/api/workload/save', {
+            const response = await fetch('https://leave-ms-server.onrender.com/api/workload/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
