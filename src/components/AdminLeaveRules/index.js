@@ -36,7 +36,7 @@ const AdminLeaveRules = () => {
 
     const fetchDesignations = async () => {
         try {
-            const response = await fetch('http://localhost:3030/api/designations');
+            const response = await fetch('https://leave-ms-server.onrender.com/api/designations');
             const data = await response.json();
             setDesignations(data);
         } catch (error) {
@@ -46,7 +46,7 @@ const AdminLeaveRules = () => {
 
     const handleAddDesignation = async () => {
         try {
-            const response = await fetch('http://localhost:3030/api/designations/add', {
+            const response = await fetch('https://leave-ms-server.onrender.com/api/designations/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ const AdminLeaveRules = () => {
 
     const handleLeaveUpdate = async (designationId, leaveCounts) => {
         try {
-            const response = await fetch(`http://localhost:3030/api/designations/${designationId}/leave`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/api/designations/${designationId}/leave`, {
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json'
