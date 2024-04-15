@@ -4,6 +4,7 @@ const Header= () => {
     const removeLocalstorageData = () => {
         localStorage.removeItem("user")
         localStorage.removeItem("userId")
+        localStorage.removeItem("leaveData")
     }
 
     return(
