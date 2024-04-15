@@ -27,7 +27,7 @@ const HODHistory = () => {
         const userParse = JSON.parse(user)
         console.log(userParse.userId)
         try {
-            const response = await fetch('http://localhost:3030/get/leaves', {
+            const response = await fetch('https://leave-ms-server.onrender.com/get/leaves', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
