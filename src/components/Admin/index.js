@@ -16,7 +16,7 @@ const AdminPage = () => {
     useEffect(() => {
         const fetchLeaveInfo = async () => {
             try {
-                const response = await fetch('http://localhost:3030/api/users/leave-info');
+                const response = await fetch('https://leave-ms-server.onrender.com/api/users/leave-info');
                 const data = await response.json();
                 setLeaveInfo(data);
             } catch (error) {
