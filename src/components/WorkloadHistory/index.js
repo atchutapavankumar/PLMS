@@ -15,7 +15,7 @@ const WorkloadHistroy = () => {
         const { userId } = userData;
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3030/api/workload/requests`);
+                const response = await fetch(`https://leave-ms-server.onrender.com/api/workload/requests`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
