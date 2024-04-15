@@ -15,7 +15,7 @@ const FacultyRequests = () => {
         const { userId } = userData;
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3030/api/workload/search`, {
+                const response = await fetch(`https://leave-ms-server.onrender.com/api/workload/search`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
