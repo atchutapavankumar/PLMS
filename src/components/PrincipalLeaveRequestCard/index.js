@@ -6,7 +6,7 @@ const PrincipalLeaveRequestsCard = (props) => {
 
     const approveLeave = async () => {
         const { _id, userId, startDate, endDate, leaveType } = data;
-        const response = await fetch(`http://localhost:3030/api/update-leave/${_id}`, {
+        const response = await fetch(`https://leave-ms-server.onrender.com/api/update-leave/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const PrincipalLeaveRequestsCard = (props) => {
         const { _id } = data;
         console.log(_id);
         try {
-            const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/api/update-leave-status/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
