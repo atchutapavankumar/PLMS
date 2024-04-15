@@ -46,8 +46,9 @@ const WorkLoadView = ({ workLoadData }) => {
     // Event handler for the "Send" button
 const handleSendClick = async (rowData, rowIndex) => {
     if (!userData) {
-        console.error('User data not found in local storage');
-        return;
+        const leaveData = JSON.parse(localStorage.getItem('leaveData'));
+        setUserData(leaveData);
+        console.error('User data found in local storage');
     }
 
     try {
