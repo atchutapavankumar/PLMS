@@ -8,7 +8,7 @@ const LeaveRequestsCard = (props) => {
         const { _id } = data;
         console.log(_id);
         try {
-            const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/api/update-leave-status/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const LeaveRequestsCard = (props) => {
         const { _id } = data;
         console.log(_id);
         try {
-            const response = await fetch(`http://localhost:3030/api/update-leave-status/${_id}`, {
+            const response = await fetch(`https://leave-ms-server.onrender.com/api/update-leave-status/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
