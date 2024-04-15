@@ -146,6 +146,7 @@ const Principal = () => {
     const removeLocalstorageData = () => {
         localStorage.removeItem("user")
         localStorage.removeItem("userId")
+        localStorage.removeItem("leaveData")
     }
 
     useEffect(() => {
