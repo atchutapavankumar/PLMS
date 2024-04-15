@@ -5,7 +5,6 @@ import './index.css';
 const Profile = () => {
   const [userName, setUserName] = useState('');
   const [gmail, setGmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [userId, setUserId] = useState('');
   const [department, setDepartment] = useState('');
   const [designation, setDesignation] = useState(''); // Add for designation
@@ -15,7 +14,7 @@ const Profile = () => {
     if (user) {
       setUserName(user.username || '');
       setGmail(user.gmail || '');
-      setPhoneNumber(user.phoneNumber || '');
+      
       setUserId(user.userId || '');
       setDepartment('IT' || 'IT');
       setDesignation(user.position || ''); // Fetch designation
@@ -41,7 +40,6 @@ const Profile = () => {
           <div className="profile-info">
             <p><strong>ID:</strong> {userId}</p> 
             <p><strong>Gmail:</strong> {gmail}</p>
-            <p><strong>Phone Number:</strong> {phoneNumber}</p>
             <p><strong>Designation:</strong> {designation}</p> {/* Display designation */}
             <p><strong>Department:</strong> {department}</p>
           </div>
