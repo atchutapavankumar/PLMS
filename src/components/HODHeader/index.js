@@ -1,5 +1,11 @@
 import {Header2Container,WeatherBackground, NavItem, LinkItem} from './styledComponents';
-const Hodheader= () => (
+const Hodheader= () => {
+    const removeLocalstorageData = () => {
+        localStorage.removeItem("user")
+        localStorage.removeItem("userId")
+        localStorage.removeItem("leaveData")
+    }
+    return(
     <Header2Container>
     <WeatherBackground>
     <LinkItem to="/hod-main"><NavItem>Home </NavItem></LinkItem>
@@ -10,11 +16,11 @@ const Hodheader= () => (
     <LinkItem to="/workload-history"><NavItem>Workload History</NavItem></LinkItem>
 
     <LinkItem to="/hod-profile"><NavItem>Profile</NavItem></LinkItem>
-    <LinkItem to="/"><NavItem>Logout</NavItem></LinkItem>
+    <LinkItem to="/"><NavItem onClick={removeLocalstorageData}>Logout</NavItem></LinkItem>
 
 
     </WeatherBackground>
     </Header2Container>
 )
-
+}
 export default Hodheader
