@@ -55,7 +55,7 @@ const Register = () => {
     const fetchLeaveCounts = async () => {
       try {
         if (position === 'Faculty' || position === 'HOD') {
-          const leaveCountsResponse = await fetch('http://localhost:3030/api/designations/leave', {
+          const leaveCountsResponse = await fetch('https://leave-ms-server.onrender.com/api/designations/leave', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const Register = () => {
 
     try {
       // Proceed with user registration
-      const response = await fetch('http://localhost:3030/api/register', {
+      const response = await fetch('https://leave-ms-server.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
