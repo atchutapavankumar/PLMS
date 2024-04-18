@@ -64,8 +64,7 @@ const WorkloadHistroy = () => {
                
             </div>
 
-            {
-                department === "IT" &&   <>  <h2 className="nav-bar-title-2 sub-t">Work Load
+           <>  <h2 className="nav-bar-title-2 sub-t">Work Load
                     <span> History</span></h2>
             <div className='blue-line-container-2'>
                 <li className='blue-dot'></li>
@@ -87,7 +86,7 @@ const WorkloadHistroy = () => {
                 ))}
             </div>
             </>
-            }
+            
         
         </div>
     );
