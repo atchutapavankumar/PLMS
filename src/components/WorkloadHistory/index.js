@@ -9,6 +9,11 @@ import Header from '../Header';
 const WorkloadHistroy = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [workloadData, setWorkLoadData] = useState([]);
+    const userData = JSON.parse(localStorage.getItem('user'));
+
+
+    const department = userData.department
+
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
@@ -58,7 +63,9 @@ const WorkloadHistroy = () => {
                 </div>
                
             </div>
-            <h2 className="nav-bar-title-2 sub-t">Work Load
+
+            {
+                department === "IT" &&   <>  <h2 className="nav-bar-title-2 sub-t">Work Load
                     <span> History</span></h2>
             <div className='blue-line-container-2'>
                 <li className='blue-dot'></li>
@@ -79,6 +86,9 @@ const WorkloadHistroy = () => {
                     <WorkloadHistroyCard key={eachData.id} data={eachData}/>
                 ))}
             </div>
+            </>
+            }
+        
         </div>
     );
 }
