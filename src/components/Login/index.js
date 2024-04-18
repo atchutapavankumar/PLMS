@@ -24,6 +24,8 @@ const Login = () => {
   const navigate = useNavigate();
 
 
+
+
   const onChangePassword = (event) => {
     setPassword(event.target.value);
   };
@@ -44,17 +46,20 @@ const Login = () => {
  
   const submitForm = async (event) => {
     event.preventDefault();
+    const apiLogin = "https://leave-ms-server.onrender.com/api/login"
+   const testApi = "http:localhost:3030/api/login"
   
     try {
-        const response = await fetch('https://leave-ms-server.onrender.com/api/login', {
+        const response = await fetch(testApi, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                password: password,
-                gmail: gmail,
+              password: password,
+              gmail: gmail,
             }),
+            
         });
   
         const data = await response.json();
@@ -100,6 +105,7 @@ const Login = () => {
     );
   };
 
+  
 
   const renderGmailField = () => {
     return (
@@ -115,10 +121,11 @@ const Login = () => {
           onChange={onChangeGmail}
           placeholder="Gmail"
         />
+      
       </>
     );
   };
-
+  
 
 
   return (
@@ -129,6 +136,7 @@ const Login = () => {
       <form className="form-container" onSubmit={submitForm}>
         <div className="input-container">{renderGmailField()}</div>
         <div className="input-container">{renderPasswordField()}</div>
+
        <Link to="/"  className='link-item'>
         <button type="submit" className="login-button" onClick={submitForm}>
           Login

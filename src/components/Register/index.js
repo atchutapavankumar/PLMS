@@ -24,6 +24,7 @@ const Register = () => {
   const [showSubmitError, setShowSubmitError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [position, setPosition] = useState('Faculty');
+  const [department, setDepartment] = useState('');
   const [leaveCountsDataset, setLeaveCountsData] = useState({});
 
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ const Register = () => {
 
   const onChangeGmail = (event) => {
     setGmail(event.target.value);
+  };
+
+  const onSelectDepartment = (event) => {
+    setDepartment(event.target.value);
   };
 
   const onSelectField = (event) => {
@@ -97,7 +102,9 @@ const Register = () => {
 
     try {
       // Proceed with user registration
-      const response = await fetch('https://leave-ms-server.onrender.com/api/register', {
+      const realApi = "https://leave-ms-server.onrender.com/api/register"
+      const testApi = "http://localhost:3030/api/register"
+      const response = await fetch(testApi, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,6 +115,7 @@ const Register = () => {
           gmail: gmail,
           userId: userId,
           position: position,
+          department: department,
           casualLeave: leaveCountsDataset.totalCasual || 0,
           earnLeave: leaveCountsDataset.totalEarn || 0,
           medicalLeave: leaveCountsDataset.totalMedical || 0,
@@ -117,6 +125,7 @@ const Register = () => {
       });
 
       const data = await response.json();
+      console.log(data)
 
       if (response.ok) {
         console.log('User registered successfully');
@@ -214,6 +223,27 @@ const Register = () => {
     );
   };
 
+  const renderDepartmentField = () => {
+    return (
+      <>
+        <label className="input-label" htmlFor="department">
+          Department
+        </label>
+        <select className="username-input-field" onChange={onSelectDepartment}>
+          <option value="">Select Department</option>
+          <option value="IT">IT</option>
+          <option value="CSE">CSE</option>
+          <option value="AI AND ML">AI AND ML</option>
+          <option value="CB AND DS">CB AND DS</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="MECH">MECH</option>
+          <option value="CIVIL">CIVIL</option>
+        </select>
+      </>
+    );
+  };
+
   const renderUserId = () => {
     return (
       <>
@@ -243,6 +273,8 @@ const Register = () => {
           <div className="input-container">{renderUserId()}</div>
           <div className="input-container">{renderPasswordField()}</div>
           <div className="input-container">{renderSelectedField()}</div>
+          <div className="input-container">{renderDepartmentField()}</div>
+
           <Link>
           <button type="submit" className="login-button" onClick={submitForm}>
             Register

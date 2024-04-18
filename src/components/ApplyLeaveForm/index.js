@@ -16,6 +16,8 @@ const ApplyLeaveForm = () => {
     const [showWorkLoad, setWorkLoad] = useState(true);
     const [workLoadData, setWorkLoadData] = useState({});
     const [applyButtonText, setApplyButtonText] = useState("Adjust Workload & Apply");
+    const department = localStorage.getItem("department");
+
 
     const fetchWorkLoad = async () => {
         try {
@@ -86,8 +88,11 @@ const ApplyLeaveForm = () => {
     const handleSubmitWA = async (event) => {
         event.preventDefault();
     
+        const testApi = "http://localhost:3030/api/apply-leave"
+        const realApi = 'https://leave-ms-server.onrender.com/api/apply-leave'
+
         try {
-            const response = await fetch('https://leave-ms-server.onrender.com/api/apply-leave', {
+            const response = await fetch(testApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,6 +100,7 @@ const ApplyLeaveForm = () => {
                 body: JSON.stringify({
                     userName,
                     leaveType,
+                    department:department,
                     startDate,
                     leaveStatus,
                     endDate,
@@ -197,6 +203,8 @@ const ApplyLeaveForm = () => {
                             <form className="create-task-form" >
                                 <div className="create-task-form-input">
                                     <label htmlFor="name">Name</label>
+                                   {
+                                    department === "IT" ? 
                                     <select
                                         id="name"
                                         name="userName"
@@ -222,9 +230,10 @@ const ApplyLeaveForm = () => {
                                             <option value="BBK. Prasad" >BBK. Prasad</option>
                                             <option value="Surekha Peravali" >Surekha Peravali</option>
                                             <option value="BEC071001">N. Sivaram Prasad</option>
-                                    </select>
+                                    </select> : <input id="name" value={userName} onChange={handleNameChange} className='task-input-field'/>}
                                     <label htmlFor="name">User Id</label>
-                                    <select
+                                    {
+                                        department === "IT" ?  <select
                                         id="userid"
                                         name="userid"
                                         value={userId}
@@ -248,8 +257,10 @@ const ApplyLeaveForm = () => {
                                             <option value="BEC071003"> BEC071003</option>
                                             <option value="BEC071006"> BEC071006</option>
 
-                                    </select>
+                                    </select>: <input id="userid" value={userId} onChange={handleUserId} className='task-input-field'/>}
 
+                                    
+                                   
                                     
                                     <label htmlFor="leaveType">Leave Type</label>
                                     <select
@@ -305,21 +316,31 @@ const ApplyLeaveForm = () => {
                                     </div>
                                 </div>
                                 <div className="btn-container-pop">
-                                      <button type="submit" className="create-btn" onClick={handleSubmitWA}>
+                                {
+                                    department === "IT" ? <>
+                                    <button type="submit" className="create-btn" onClick={handleSubmitWA}>
                                         Apply With Adjustment
                                     </button>
                                     <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
                                         Apply Without Adjustment
                                     </button>
+                                    </> : <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
+                                        Apply
+                                    </button>
+                                }
+                                      
                                 </div>
                             </form>
                         </div>
                     </div>
                 
                 </div>
-                 <div className='work-load-form'>
+                {
+                    department === "IT" &&    <div className='work-load-form'>
                  <WorkLoadView workLoadData={workLoadData} />
                  </div>
+                }
+               
             </div>
         </div>
     );

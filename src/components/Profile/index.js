@@ -16,7 +16,7 @@ const Profile = () => {
       setGmail(user.gmail || '');
       
       setUserId(user.userId || '');
-      setDepartment('IT' || 'IT');
+      setDepartment(user.department || '');
       setDesignation(user.position || ''); // Fetch designation
     }
   }, []);
