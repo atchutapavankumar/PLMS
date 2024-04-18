@@ -23,6 +23,8 @@ const optionsMap = {
 const WorkloadHistroyCard = (props) => {
   const { data } = props;
   const assignText = optionsMap[data.assign];
+  const user = JSON.parse(localStorage.getItem("user"))
+  const department = user.department
 
   return (
     <div className='table-row'>
@@ -30,7 +32,10 @@ const WorkloadHistroyCard = (props) => {
       <p>{data.class}</p>
       <p>{data.date}</p>
       <p>{data.period}</p>
-      <p>{assignText}</p>
+{
+  department === "IT" ? <p>{assignText}</p> : <p>{data.assign}</p>
+}
+      
       <p>{data.status}</p>
     </div>
   );

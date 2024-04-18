@@ -4,8 +4,8 @@ import './index.css';
 const WorkLoadView = ({ workLoadData }) => {
     const [sentData, setSentData] = useState({});
     const [userData, setUserData] = useState(null);
-    const user = JSON.parse(localStorage.getItem("user"))   
-    const department = user.department
+    const user = JSON.parse(localStorage.getItem("user"));
+    const department = user.department;
 
     useEffect(() => {
         // Fetch user data from local storage when component mounts
@@ -19,7 +19,6 @@ const WorkLoadView = ({ workLoadData }) => {
     const sendDataToAPI = async (rowData, rowIndex) => {
         try {
             // Perform fetch POST request to your API endpoint
-            console.log(rowData)
             const response = await fetch('http://localhost:3030/api/workload/save', {
                 method: 'POST',
                 headers: {
@@ -45,38 +44,48 @@ const WorkLoadView = ({ workLoadData }) => {
     };
 
     // Event handler for the "Send" button
-    // Event handler for the "Send" button
-const handleSendClick = async (rowData, rowIndex) => {
-    if (!userData) {
-        const leaveData = JSON.parse(localStorage.getItem('leaveData'));
-        setUserData(leaveData);
-        console.error('User data found in local storage');
-    }
-
-    try {
-        // Retrieve the selected option value from the dropdown
-        const selectedOption = document.getElementById(`select-${rowIndex}`).value;
-
-        // Add the selected option value to the rowData
-        rowData.assign = selectedOption;
-
-        const payload = {
-            ...rowData,
-            userId: userData.userId,
-            username: userData.userName // Changed from username to userName
-        };
-
-        const isSent = await sendDataToAPI(payload, rowIndex);
-
-        if (isSent) {
-            // Update sentData state to mark this row as sent
-            setSentData({ ...sentData, [rowIndex]: true });
+    const handleSendClick = async (rowData, rowIndex) => {
+        if (!userData) {
+            const leaveData = JSON.parse(localStorage.getItem('leaveData'));
+            setUserData(leaveData);
+            console.error('User data found in local storage');
         }
-    } catch (error) {
-        console.error('Error handling send click:', error);
-    }
-};
 
+        try {
+            let assignValue;
+            if (department === "IT") {
+                // Retrieve the selected option value from the dropdown
+                assignValue = document.getElementById(`select-${rowIndex}`).value;
+            } else {
+                // Retrieve staff ID from input field
+                const staffIdInput = document.getElementById(`staff-id-${rowIndex}`);
+                if (staffIdInput) {
+                    assignValue = staffIdInput.value;
+                } else {
+                    console.error('Staff ID input element not found');
+                    return;
+                }
+            }
+
+            // Add the assign value to the rowData
+            rowData.assign = assignValue;
+
+            const payload = {
+                ...rowData,
+                userId: userData.userId,
+                username: userData.userName // Changed from username to userName
+            };
+
+            const isSent = await sendDataToAPI(payload, rowIndex);
+
+            if (isSent) {
+                // Update sentData state to mark this row as sent
+                setSentData({ ...sentData, [rowIndex]: true });
+            }
+        } catch (error) {
+            console.error('Error handling send click:', error);
+        }
+    };
 
     return (
         <div className='admin-main-container'>
@@ -108,28 +117,28 @@ const handleSendClick = async (rowData, rowIndex) => {
                                         <p>{period.period}</p>
                                         <p>{period.class}</p>
                                         <p>{period.sub}</p>
-                                        {department === "IT" ? <>
-                                        <select id={`select-${dayIndex}-${periodIndex}`} name="name" className="drop-down">
-                                            <option value="BEC071002">K. Srinivasa Rao</option>
-                                            <option value="BEC071003">P. A. V Krishna Rao</option>
-                                            <option value="BEC071004">G. Prasad</option>
-                                            <option value="BEC071005">K. Bhaskara Rao</option>
-                                            <option value="BEC071006">B. Krishnaiah</option>
-                                            <option value="BEC071007">M. Praveen Kumar</option>
-                                            <option value="BEC071008">N. Srinivasa Rao</option>
-                                            <option value="BEC071009">K. Sai Prasanth</option>
-                                            <option value="BEC071010">P. Ratna Prakash</option>
-                                            <option value="BEC071011">P. Ravi Kumar</option>
-                                            <option value="BEC071012">K. Suresh Kumar</option>
-                                            <option value="BEC071013">S. Ratna Babu</option>
-                                            <option value="BEC071017">Mastanaiah Naidu Yasam</option>
-                                            <option value="BEC071018">P. Sreedhar</option>
-                                            <option value="BEC071019">BBK. Prasad</option>
-                                            <option value="BEC071020">Surekha Peravali</option>
-                                        </select></>:<><input type="text" placeholder="Staff ID" />
-                                        </>
-                                        }
-                                       
+                                        {department === "IT" ? (
+                                            <select id={`select-${dayIndex}-${periodIndex}`} name="name" className="drop-down">
+                                                <option value="BEC071002">K. Srinivasa Rao</option>
+                                                <option value="BEC071003">P. A. V Krishna Rao</option>
+                                                <option value="BEC071004">G. Prasad</option>
+                                                <option value="BEC071005">K. Bhaskara Rao</option>
+                                                <option value="BEC071006">B. Krishnaiah</option>
+                                                <option value="BEC071007">M. Praveen Kumar</option>
+                                                <option value="BEC071008">N. Srinivasa Rao</option>
+                                                <option value="BEC071009">K. Sai Prasanth</option>
+                                                <option value="BEC071010">P. Ratna Prakash</option>
+                                                <option value="BEC071011">P. Ravi Kumar</option>
+                                                <option value="BEC071012">K. Suresh Kumar</option>
+                                                <option value="BEC071013">S. Ratna Babu</option>
+                                                <option value="BEC071017">Mastanaiah Naidu Yasam</option>
+                                                <option value="BEC071018">P. Sreedhar</option>
+                                                <option value="BEC071019">BBK. Prasad</option>
+                                                <option value="BEC071020">Surekha Peravali</option>
+                                            </select>
+                                        ) : (
+                                            <input type="text" placeholder="Staff ID" id={`staff-id-${dayIndex}-${periodIndex}`} />
+                                        )}
                                         <button
                                             type="button"
                                             className='send-btn'
@@ -139,7 +148,6 @@ const handleSendClick = async (rowData, rowIndex) => {
                                                 period: period.period,
                                                 class: period.class,
                                                 sub: period.sub,
-                                        
                                                 assign: period.option,
                                                 status: 'Pending'
                                             }, `${dayIndex}-${periodIndex}`)}
