@@ -326,18 +326,15 @@ const ApplyLeaveForm = () => {
                                     </div>
                                 </div>
                                 <div className="btn-container-pop">
-                                {
-                                    department === "IT" ? <>
+                                
                                     <button type="submit" className="create-btn" onClick={handleSubmitWA}>
                                         Apply With Adjustment
                                     </button>
                                     <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
                                         Apply Without Adjustment
                                     </button>
-                                    </> : <button type="submit" className="create-btn" onClick={handleSubmitWOA}>
-                                        Apply
-                                    </button>
-                                }
+                                    
+                                
                                       
                                 </div>
                             </form>
@@ -345,11 +342,10 @@ const ApplyLeaveForm = () => {
                     </div>
                 
                 </div>
-                {
-                    department === "IT" &&    <div className='work-load-form'>
+                <div className='work-load-form'>
                  <WorkLoadView workLoadData={workLoadData} />
                  </div>
-                }
+                
                
             </div>
         </div>
