@@ -4,6 +4,8 @@ import './index.css';
 const WorkLoadView = ({ workLoadData }) => {
     const [sentData, setSentData] = useState({});
     const [userData, setUserData] = useState(null);
+    const user = JSON.parse(localStorage.getItem("user"))   
+    const department = user.department
 
     useEffect(() => {
         // Fetch user data from local storage when component mounts
@@ -18,7 +20,7 @@ const WorkLoadView = ({ workLoadData }) => {
         try {
             // Perform fetch POST request to your API endpoint
             console.log(rowData)
-            const response = await fetch('https://leave-ms-server.onrender.com/api/workload/save', {
+            const response = await fetch('http://localhost:3030/api/workload/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -106,6 +108,7 @@ const handleSendClick = async (rowData, rowIndex) => {
                                         <p>{period.period}</p>
                                         <p>{period.class}</p>
                                         <p>{period.sub}</p>
+                                        {department === "IT" ? <>
                                         <select id={`select-${dayIndex}-${periodIndex}`} name="name" className="drop-down">
                                             <option value="BEC071002">K. Srinivasa Rao</option>
                                             <option value="BEC071003">P. A. V Krishna Rao</option>
@@ -123,7 +126,10 @@ const handleSendClick = async (rowData, rowIndex) => {
                                             <option value="BEC071018">P. Sreedhar</option>
                                             <option value="BEC071019">BBK. Prasad</option>
                                             <option value="BEC071020">Surekha Peravali</option>
-                                        </select>
+                                        </select></>:<><input type="text" placeholder="Staff ID" />
+                                        </>
+                                        }
+                                       
                                         <button
                                             type="button"
                                             className='send-btn'
@@ -133,6 +139,7 @@ const handleSendClick = async (rowData, rowIndex) => {
                                                 period: period.period,
                                                 class: period.class,
                                                 sub: period.sub,
+                                        
                                                 assign: period.option,
                                                 status: 'Pending'
                                             }, `${dayIndex}-${periodIndex}`)}
