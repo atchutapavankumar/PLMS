@@ -47,7 +47,7 @@ const Login = () => {
   const submitForm = async (event) => {
     event.preventDefault();
     const apiLogin = "https://leave-ms-server.onrender.com/api/login"
-   const testApi = "http:localhost:3030/api/login"
+   const testApi = "http://localhost:3030/api/login"
   
     try {
         const response = await fetch(testApi, {

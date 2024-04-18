@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import './index.css'; 
+import Hodheader from '../HODHeader';
 
 const Profile = () => {
   const [userName, setUserName] = useState('');
@@ -12,12 +13,12 @@ const Profile = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data
-    if (user) {
+    if (user)  {
       setUserName(user.username || '');
       setGmail(user.gmail || '');
       setPhoneNumber(user.phoneNumber || '');
       setUserId(user.userId || '');
-      setDepartment('IT' || 'IT');
+      setDepartment(user.department|| '');
       setDesignation(user.position || ''); // Fetch designation
     }
   }, []);
@@ -29,7 +30,7 @@ const Profile = () => {
         className="clg-logo" 
         alt="College Logo" 
       />
-      <Header /> 
+      <Hodheader /> 
       <div className="profile-container"> 
         <div className="profile-card">
           <img 

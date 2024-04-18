@@ -144,9 +144,11 @@ const HOD = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [requestsData, setRequestsData] = useState([])
 
+    const user = JSON.parse(localStorage.getItem('user'))
+    const department = user.department
 
     useEffect(() => {
-        fetchRequestsData()
+        fetchRequestsData(department)
 
       const interval = setInterval(() => {
         setDateTime(new Date());
@@ -155,11 +157,16 @@ const HOD = () => {
       return () => clearInterval(interval);
     }, []);
   
-    const fetchRequestsData = async () => {
-        const res = await fetch("https://leave-ms-server.onrender.com/get/pending/leaves")
-        const data = await res.json();
-        setRequestsData(data)
-} 
+    const fetchRequestsData = async (department) => {
+        try {
+            const res = await fetch(`https://leave-ms-server.onrender.com/get/pending/leaves/${department}`);
+            const data = await res.json();
+            setRequestsData(data);
+        } catch (error) {
+            console.error("Error fetching pending leaves:", error);
+        }
+    };
+    
     const formatDate = (date) => {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       return date.toLocaleDateString('en-US', options);

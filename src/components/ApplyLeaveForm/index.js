@@ -5,18 +5,23 @@ import WorkLoadView from '../WorkLoadView';
 const ApplyLeaveForm = () => {
     const [dateTime, setDateTime] = useState(new Date());
     const [showApplyForm, setShowApplyForm] = useState(false);
-    const [userName, setUserName] = useState("K. Srinivasa Rao");
+    const [userName, setUserName] = useState("");
     const [leaveType, setLeaveType] = useState("Casual");
     const [startDate, setStartDate] = useState("");
     const [endDate, setExpiryDate] = useState("");
-    const [userId, setUserId] = useState("BEC071008");
+    const [userId, setUserId] = useState("");
     const [reason, setReason] = useState();
     const [leaveStatus, setleaveStatus] = useState("Pending");
 
     const [showWorkLoad, setWorkLoad] = useState(true);
     const [workLoadData, setWorkLoadData] = useState({});
     const [applyButtonText, setApplyButtonText] = useState("Adjust Workload & Apply");
-    const department = localStorage.getItem("department");
+    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user data
+
+    const department = user["department"]
+    console.log(department)
+
+
 
 
     const fetchWorkLoad = async () => {
@@ -52,9 +57,13 @@ const ApplyLeaveForm = () => {
 
     const handleSubmitWOA = async (event) => {
         event.preventDefault();
+        const testApi = "http://localhost:3030/api/apply-leave"
+        const realApi = 'https://leave-ms-server.onrender.com/api/apply-leave'
+
+
 
         try {
-            const response = await fetch('https://leave-ms-server.onrender.com/api/apply-leave', {
+            const response = await fetch(testApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,6 +73,7 @@ const ApplyLeaveForm = () => {
                     leaveType,
                     startDate,
                     endDate,
+                    department,
                     leaveStatus,
                     reason,
                     userId
@@ -100,7 +110,7 @@ const ApplyLeaveForm = () => {
                 body: JSON.stringify({
                     userName,
                     leaveType,
-                    department:department,
+                    department,
                     startDate,
                     leaveStatus,
                     endDate,
