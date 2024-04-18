@@ -26,7 +26,7 @@ const ApplyLeaveForm = () => {
 
     const fetchWorkLoad = async () => {
         try {
-            const res = await fetch('https://leave-ms-server.onrender.com/api/workload/schedule', {
+            const res = await fetch('http://localhost:3030/api/workload/schedule', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
